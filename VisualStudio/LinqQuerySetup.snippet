@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Linq query</Title>
+			<Description>Long unintuitive syntax for creating a Linq Query.</Description>
+			<Author>Eli Hayon</Author>
+			<Shortcut>LinqQuery</Shortcut>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+				<SnippetType>SurroundsWith</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="csharp"><![CDATA[var q = (from t in context.table1
+where t.column1 equals "someValue"
+select t.column2).ToList();]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

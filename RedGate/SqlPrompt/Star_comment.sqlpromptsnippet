@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Star_comment</Title>
+      <Shortcut>Star_comment</Shortcut>
+      <Description>Surround text with a multilined star comment.</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[/* $SELECTEDTEXT$ */]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

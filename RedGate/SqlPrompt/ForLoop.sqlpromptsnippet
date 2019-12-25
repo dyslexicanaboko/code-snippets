@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>ForLoop</Title>
+      <Shortcut>ForLoop</Shortcut>
+      <Description>Create a for loop using a while statement and an incrementor @i</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[DECLARE @tbl TABLE
+(
+	 EntryId INT IDENTITY(0, 1) NOT NULL
+	,SomeValue INT
+);
+
+DECLARE @i INT = 0;
+DECLARE @count INT = (SELECT COUNT(EntryId) FROM @tbl);
+
+WHILE @i < @count
+BEGIN
+	DECLARE @someValue INT;
+
+	SELECT @someValue = SomeValue FROM @tbl WHERE EntryId = @i;
+	
+	-- Do stuff here
+	
+	SET @i += 1;
+END]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

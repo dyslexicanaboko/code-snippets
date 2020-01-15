@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>try_catch</Title>
+      <Shortcut>try_catch</Shortcut>
+      <Description>Try catch with error data as a select</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[BEGIN TRY
+	$SELECTEDTEXT$    
+END TRY  
+BEGIN CATCH  
+    SELECT  
+         ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_LINE() AS ErrorLine  
+        ,ERROR_MESSAGE() AS ErrorMessage;  
+END CATCH;]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

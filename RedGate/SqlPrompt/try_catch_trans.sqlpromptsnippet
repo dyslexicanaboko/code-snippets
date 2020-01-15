@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>try_catch_trans</Title>
+      <Shortcut>try_catch_trans</Shortcut>
+      <Description />
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[BEGIN TRY
+	BEGIN TRANSACTION
+    
+	$SELECTEDTEXT$
+
+	COMMIT TRANSACTION
+END TRY  
+BEGIN CATCH
+	ROLLBACK TRANSACTION
+
+    SELECT  
+         ERROR_NUMBER() AS ErrorNumber  
+        ,ERROR_SEVERITY() AS ErrorSeverity  
+        ,ERROR_STATE() AS ErrorState  
+        ,ERROR_PROCEDURE() AS ErrorProcedure  
+        ,ERROR_LINE() AS ErrorLine  
+        ,ERROR_MESSAGE() AS ErrorMessage;  
+END CATCH;]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

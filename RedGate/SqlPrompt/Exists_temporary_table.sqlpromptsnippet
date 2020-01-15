@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Exists_temporary_table</Title>
+      <Shortcut>Exists_temporary_table</Shortcut>
+      <Description>Does a temporary table already exist</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[-- Check if a temporary table exists
+if OBJECT_ID('tempdb..#tempTableNameHere') is not null]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

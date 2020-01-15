@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Exists_table</Title>
+      <Shortcut>Exists_table</Shortcut>
+      <Description>Does a table exists in the database</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[-- Check if a table exists
+IF (EXISTS (SELECT * 
+                 FROM INFORMATION_SCHEMA.TABLES 
+                 WHERE TABLE_SCHEMA = 'dbo' 
+                 AND TABLE_NAME = 'TableNameHere'
+				 AND TABLE_TYPE = 'BASE TABLE'))]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

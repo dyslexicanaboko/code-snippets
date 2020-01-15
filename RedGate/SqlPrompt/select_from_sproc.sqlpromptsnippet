@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>select_from_sproc</Title>
+      <Shortcut>select_from_sproc</Shortcut>
+      <Description>Select the results from a stored procedure into a table variable</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[DECLARE @tbl TABLE 
+( 
+	IntValue INT 
+)
+
+INSERT @tbl 
+EXEC dbo.StoredProcedureName @param = @param1]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

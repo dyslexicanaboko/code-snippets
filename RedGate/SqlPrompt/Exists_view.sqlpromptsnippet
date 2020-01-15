@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Exists_view</Title>
+      <Shortcut>Exists_view</Shortcut>
+      <Description>Does a view already exist in this database</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[-- Check if a view exists
+IF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS
+	WHERE TABLE_SCHEMA = 'dbo' 
+		AND TABLE_NAME = 'viewNameHere'
+		AND TABLE_TYPE = 'VIEW'))]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

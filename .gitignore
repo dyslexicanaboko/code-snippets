@@ -21,10 +21,11 @@ mono_crash.*
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-x64/
-x86/
+[Xx]64/
+[Xx]86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
+[Bb]uild/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -67,6 +68,7 @@ StyleCopReport.xml
 # Files built by Visual Studio
 *_i.c
 *_p.c
+*_i.h
 *_h.h
 *.ilk
 *.meta
@@ -126,6 +128,8 @@ $tf/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
+# JustCode is a .NET coding add-in
+.JustCode
 
 # TeamCity is a build add-in
 _TeamCity*
@@ -187,6 +191,7 @@ PublishScripts/
 # NuGet Symbol Packages
 *.snupkg
 # The packages folder can be ignored because of Package Restore
+packages/*
 **/[Pp]ackages/*
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
@@ -221,6 +226,7 @@ _pkginfo.txt
 
 # Others
 ClientBin/
+[Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
@@ -228,6 +234,7 @@ ClientBin/
 *.jfm
 *.pfx
 *.publishsettings
+node_modules/
 orleans.codegen.cs
 
 # Including strong name files can present a security risk
@@ -291,6 +298,9 @@ node_modules/
 **/*.Server/GeneratedArtifacts
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
+# LightSwitch generated files
+GeneratedArtifacts/
+ModelManifest.xml
 
 # Paket dependency manager
 .paket/paket.exe
@@ -298,6 +308,8 @@ paket-files/
 
 # FAKE - F# Make
 .fake/
+
+/sh.exe.stackdump
 
 # CodeRush personal settings
 .cr/personal
@@ -349,6 +361,6 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-#Custom adds
-.lnk
-.bak
+#Non templated ignores / custom entries
+*.lnk
+*.bak

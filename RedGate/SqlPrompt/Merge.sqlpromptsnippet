@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Merge</Title>
+      <Shortcut>Merge</Shortcut>
+      <Description>Merge statement example</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[MERGE Production.UnitMeasure AS target  
+USING (SELECT @UnitMeasureCode, @Name) AS source (UnitMeasureCode, Name)  
+ON (target.UnitMeasureCode = source.UnitMeasureCode)  
+WHEN MATCHED THEN
+    UPDATE SET Name = source.Name  
+WHEN NOT MATCHED THEN  
+    INSERT (UnitMeasureCode, Name)  
+    VALUES (source.UnitMeasureCode, source.Name)  
+OUTPUT deleted.*, $action, inserted.* INTO #MyTempTable; ]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

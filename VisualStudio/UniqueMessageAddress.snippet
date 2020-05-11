@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Unique message address</Title>
+			<Description>Use when you need to know where a message originated. Unique identifier that is human readable will be easy to find in code.</Description>
+			<Author>Eli Hayon</Author>
+			<Shortcut>messageAddress</Shortcut>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<!-- https://code.visualstudio.com/docs/editor/userdefinedsnippets - doesn't work as expected sadly. Keeping this for the future just in case. -->
+			<Code Language="csharp"><![CDATA[ var blah = "0x$CURRENT_YEAR$CURRENT_MONTH$CURRENT_DATE$CURRENT_HOUR$CURRENT_MINUTE$CURRENT_SECOND"; ]]></Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

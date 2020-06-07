@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>identity_insert_off</Title>
+      <Shortcut>identity_insert_off</Shortcut>
+      <Description>Turn off identity insert for a table</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[SET IDENTITY_INSERT $SELECTEDTEXT$ OFF]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

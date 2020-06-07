@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Execute reader</Title>
+			<Description>Syntax for creating a vanilla ADO.NET SQL command execution</Description>
+			<Author>Eli Hayon</Author>
+			<Shortcut>ExecuteReader</Shortcut>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="csharp"><![CDATA[using (var con = new SqlConnection(""))
+	{
+		con.Open();
+
+		using (var cmd = new SqlCommand("", con))
+		{
+			using (var dr = cmd.ExecuteReader())
+			{
+				while (dr.Read())
+				{
+					//var obj = Convert.ToInt32(dr[""]);			
+				}
+			}
+		}
+	}]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

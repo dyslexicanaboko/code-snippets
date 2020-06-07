@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>throw_exception</Title>
+      <Shortcut>throw_exception</Shortcut>
+      <Description>Throw an exception</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[IF NOT EXISTS(/*Your query*/) BEGIN
+	DECLARE @msg NVARCHAR(2048) = 'Format your message here';
+
+	;THROW 60000, @msg, 1;
+END]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

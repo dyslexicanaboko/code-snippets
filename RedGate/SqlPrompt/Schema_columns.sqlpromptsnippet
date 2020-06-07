@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>ForLoop</Title>
+      <Shortcut>ForLoop</Shortcut>
+      <Description>Create a for loop using a while statement and an incrementor @i</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[SELECT
+	   s.name AS SchemaName
+	  ,t.name AS TableName
+      ,c.name AS ColumnName
+FROM sys.schemas s
+	INNER JOIN sys.tables t
+		ON t.schema_id = s.schema_id
+	INNER JOIN sys.columns c
+		ON c.object_id = t.object_id
+WHERE s.name = 'dbo'
+ORDER BY
+	  t.name
+	 ,c.name]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

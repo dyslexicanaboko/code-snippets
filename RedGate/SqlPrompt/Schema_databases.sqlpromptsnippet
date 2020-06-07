@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>ForLoop</Title>
+      <Shortcut>ForLoop</Shortcut>
+      <Description>Create a for loop using a while statement and an incrementor @i</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[SELECT
+	 database_id
+	,name
+FROM sys.databases 
+WHERE database_id > 4]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

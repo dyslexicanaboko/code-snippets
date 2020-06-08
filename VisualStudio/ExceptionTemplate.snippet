@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Exception template</Title>
+			<Description>Starting point for writing a custom application exception</Description>
+			<Author>Eli Hayon</Author>
+			<Shortcut>extem</Shortcut>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="csharp"><![CDATA[public class MyException
+	: Exception
+{
+	public MyException()
+		: base(GetMessage("arguments"))
+	{
+
+	}
+
+	private static string GetMessage(string myArguments)
+	{
+		var str = myArguments + "Pass as many arguments as needed to construct a meaningful message.";
+
+		return str;
+	}
+}]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

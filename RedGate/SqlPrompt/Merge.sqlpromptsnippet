@@ -2,8 +2,8 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Merge</Title>
-      <Shortcut>Merge</Shortcut>
+      <Title>Merge statement</Title>
+      <Shortcut>Merge_statement</Shortcut>
       <Description>Merge statement example</Description>
       <Author />
       <SnippetTypes>

@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>throw_exception</Title>
+      <Title>throw exception</Title>
       <Shortcut>throw_exception</Shortcut>
       <Description>Throw an exception</Description>
       <Author />

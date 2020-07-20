@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>try_catch_trans</Title>
+      <Title>try catch inside transaction</Title>
       <Shortcut>try_catch_trans</Shortcut>
       <Description />
       <Author />

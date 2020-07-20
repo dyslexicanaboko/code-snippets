@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>try_catch</Title>
+      <Title>try catch</Title>
       <Shortcut>try_catch</Shortcut>
       <Description>Try catch with error data as a select</Description>
       <Author />

@@ -2,9 +2,9 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>ForLoop</Title>
-      <Shortcut>ForLoop</Shortcut>
-      <Description>Create a for loop using a while statement and an incrementor @i</Description>
+      <Title>Schema databases</Title>
+      <Shortcut>Schema_databases</Shortcut>
+      <Description>Select all user created databases from sys.databases</Description>
       <Author />
       <SnippetTypes>
         <SnippetType>Expansion</SnippetType>

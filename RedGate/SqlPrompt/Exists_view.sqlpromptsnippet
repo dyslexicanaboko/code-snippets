@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Exists_view</Title>
+      <Title>Exists view</Title>
       <Shortcut>Exists_view</Shortcut>
       <Description>Does a view already exist in this database</Description>
       <Author />

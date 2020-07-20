@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>ForLoop</Title>
+      <Title>For Loop</Title>
       <Shortcut>ForLoop</Shortcut>
       <Description>Create a for loop using a while statement and an incrementor @i</Description>
       <Author />

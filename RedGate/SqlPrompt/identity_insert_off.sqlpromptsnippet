@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>identity_insert_off</Title>
+      <Title>identity_insert off</Title>
       <Shortcut>identity_insert_off</Shortcut>
       <Description>Turn off identity insert for a table</Description>
       <Author />

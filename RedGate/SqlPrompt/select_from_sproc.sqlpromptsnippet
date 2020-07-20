@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>select_from_sproc</Title>
+      <Title>select from sproc</Title>
       <Shortcut>select_from_sproc</Shortcut>
       <Description>Select the results from a stored procedure into a table variable</Description>
       <Author />

@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Star_comment</Title>
+      <Title>Star comment</Title>
       <Shortcut>Star_comment</Shortcut>
       <Description>Surround text with a multilined star comment.</Description>
       <Author />

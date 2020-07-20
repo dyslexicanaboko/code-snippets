@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Exists_temporary_table</Title>
+      <Title>Exists temporary table</Title>
       <Shortcut>Exists_temporary_table</Shortcut>
       <Description>Does a temporary table already exist</Description>
       <Author />

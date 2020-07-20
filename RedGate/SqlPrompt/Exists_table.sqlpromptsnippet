@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>Exists_table</Title>
+      <Title>Exists table</Title>
       <Shortcut>Exists_table</Shortcut>
       <Description>Does a table exists in the database</Description>
       <Author />

@@ -2,7 +2,7 @@
 <CodeSnippets>
   <CodeSnippet Format="1.0.0">
     <Header>
-      <Title>identity_insert_on</Title>
+      <Title>identity_insert on</Title>
       <Shortcut>identity_insert_on</Shortcut>
       <Description>Turn on identity insert for a table</Description>
       <Author />

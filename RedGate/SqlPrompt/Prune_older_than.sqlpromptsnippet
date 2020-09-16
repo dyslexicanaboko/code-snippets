@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Prune older than 30 days</Title>
+      <Shortcut>Prune_old</Shortcut>
+      <Description>Count the number of rows that are older than 30 days. Can easily be changed to a DELETE FROM statement.</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[-- Count number of rows that are older than 30 days
+SELECT COUNT(EntryId) FROM dbo.Table WHERE DATEDIFF(DAY, CreatedOnUtc, GETUTCDATE()) >= 30]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>try catch inside transaction with throw</Title>
+      <Shortcut>try_catch_trans_throw</Shortcut>
+      <Description />
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[BEGIN TRY
+	BEGIN TRANSACTION
+    
+	$SELECTEDTEXT$
+
+	COMMIT TRANSACTION
+END TRY  
+BEGIN CATCH
+	ROLLBACK TRANSACTION
+
+    ;THROW;  
+END CATCH;]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

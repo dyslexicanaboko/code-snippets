@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Schema stored procedure</Title>
+      <Shortcut>Schema_sproc</Shortcut>
+      <Description>Select all stored procedures under the dbo schema from sys.tables</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[SELECT
+	 s.name AS SchemaName
+	,p.name AS ProcedureName
+FROM sys.schemas s
+	INNER JOIN sys.procedures p
+		ON p.schema_id = s.schema_id
+WHERE s.name = 'dbo' 
+	AND p.name = 'sprocName']]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

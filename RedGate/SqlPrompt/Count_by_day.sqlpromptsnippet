@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Count number of rows by day</Title>
+      <Shortcut>Count_by_day</Shortcut>
+      <Description>Count the number of rows by day of a created on column. This is a type of aging of data.</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[SELECT
+	 CAST(CreatedOnUtc AS DATE) AS [Day]
+	,COUNT(TableId) AS Exceptions 
+  FROM dbo.TableName
+  GROUP BY CAST(CreatedOnUtc AS DATE)
+  ORDER BY CAST(CreatedOnUtc AS DATE)]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

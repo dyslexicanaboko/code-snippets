@@ -1,0 +1,38 @@
+USE [master]
+
+IF db_id('{{Database}}') IS NOT NULL
+BEGIN
+	PRINT 'Going into single user mode'
+	
+	ALTER DATABASE [{{Database}}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE
+	
+	PRINT 'Dropping database'
+	
+	DROP DATABASE [{{Database}}]
+END
+
+PRINT 'Restoring database'
+
+RESTORE DATABASE [{{Database}}] 
+FROM DISK = N'{{BakFileLocation}}' 
+WITH 
+	 FILE = 1
+	,MOVE N'{{Database}}_Data' 
+		TO N'{{MdfPath}}{{Database}}_Data.MDF'
+	,MOVE N'{{Database}}_Log' 
+		TO N'{{LdfPath}}{{Database}}_Log.LDF'
+	,NOUNLOAD
+	,REPLACE
+	,STATS = 5
+
+IF (SELECT user_access_desc FROM sys.databases WHERE name = '{{Database}}') = 'SINGLE_USER'
+BEGIN
+	PRINT 'Turning off single user mode'
+	
+	ALTER DATABASE [{{Database}}] SET MULTI_USER
+END
+
+GO
+
+USE [{{Database}}];
+GO

@@ -2,6 +2,8 @@
 
 void Main()
 {
+	//Known issue: European names that have multiple parts to the last name are not split correctly
+	//Example: "Ana de Armas" or "Ana de la Reguera"
 	var arr = new[] {
 		"First Last",
 		"First Middle Last"
@@ -36,11 +38,9 @@ void Main()
 	{
 		var m = p.Middle == null ? "NULL" : "N'" + p.Middle + "'";
 
-		Console.WriteLine($"EXEC dbo.AddPerson @firstName = N'{p.First}', @middleName = {m}, @lastName = N'{p.Last}', @genderId = 1, @userId = 1;");
+		Console.WriteLine($"EXEC dbo.AddPerson @firstName = N'{p.First}', @middleName = {m}, @lastName = N'{p.Last}', @genderId = 0, @userId = 1;");
 	}
 }
-
-
 
 public class Person
 {

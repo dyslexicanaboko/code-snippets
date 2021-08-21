@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<title></title>
+		<script>
+			var WorkItemsArray = "WorkItemsArray";
+			var _arrWorkItems = [];
+
+			function btnGoToWorkItem() {
+
+				var workItemId = document.getElementById("txtWorkitemId").value;
+
+				saveWorkitem(workItemId);
+
+				var strUrl = getUrl(workItemId);
+
+				window.location = strUrl;
+			}
+
+			function getUrl(workItemId) {
+				var strUrl = "https://TfsUrlHere/CollectionHere/RepositoryHere/_workitems/edit/";
+
+				strUrl += workItemId;
+
+				return strUrl;
+			}
+
+			function txtWorkitemId_OnEnterKeyPressed() {
+				// Get the input field
+				var input = document.getElementById("txtWorkitemId");
+
+				// Execute a function when the user releases a key on the keyboard
+				input.addEventListener("keyup", function(event) {
+					// Number 13 is the "Enter" key on the keyboard
+					if (event.keyCode === 13) {
+						// Cancel the default action, if needed
+						event.preventDefault();
+						// Trigger the button element with a click
+						document.getElementById("btnGo").click();
+					}
+				});
+			}
+
+			function saveWorkitem(workItem) {
+				if(_arrWorkItems === undefined) {
+					_arrWorkItems = [];
+				}
+
+				//Don't save it again if it already exists
+				for(var j = 0; j < _arrWorkItems.length; j++) {
+					if(_arrWorkItems[j] === workItem) {
+						return;
+					}
+				}
+
+				_arrWorkItems.push(workItem);
+				
+				while(_arrWorkItems.length > 10) {
+					_arrWorkItems.shift();
+				}
+
+				var strJson = JSON.stringify(_arrWorkItems);
+
+				localStorage.setItem(WorkItemsArray, strJson);
+			}
+
+			function loadWorkItemsList() {
+				_arrWorkItems = JSON.parse(localStorage.getItem(WorkItemsArray));
+
+				if(_arrWorkItems === null || _arrWorkItems === undefined) {
+					_arrWorkItems = [];
+				}
+
+				var ol = document.getElementById("olWorkItems");
+
+				_arrWorkItems.forEach(e => {
+					var li = document.createElement("li");
+
+					var strUrl = getUrl(e);
+
+					var a = '<a href="' + strUrl + '">' + e + '</a>';
+
+					li.innerHTML = a;
+					
+					ol.appendChild(li);
+				});
+			}
+		</script>
+	</head>
+	<body style="background-color:black; color:white;">
+		<div style="float:left;">
+			<input type="number" id="txtWorkitemId" /><button id="btnGo" onclick="btnGoToWorkItem()">GO</button>
+			<br />
+			<hr />
+			<fieldset>
+				<legend>New</legend>
+				<ul>
+					<li><a href="https://TfsUrlHere/CollectionHere/RepositoryHere/_workitems/create/Bug">Bug</a></li>
+					<li><a href="https://TfsUrlHere/CollectionHere/RepositoryHere/_workitems/create/User%20Story">User Story</a></li>
+				</ul>
+			</fieldset>
+			<br />
+			<fieldset>
+				<legend>Last 10 work items</legend>
+				<ol id="olWorkItems">
+				</ol>
+			</fieldset>
+		</div>
+		<script>
+			txtWorkitemId_OnEnterKeyPressed();
+			loadWorkItemsList();
+		</script>	
+	</body>
+</html>

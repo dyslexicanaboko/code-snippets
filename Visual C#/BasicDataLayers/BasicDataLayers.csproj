@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BulkCopyStatements\" />
     <Folder Include="DapperFlavor\" />
     <Folder Include="EfFluentApiFlavor\" />
     <Folder Include="StaticStatements\" />

@@ -7,7 +7,7 @@ namespace BasicDataLayers.DynamicStatements
     public class AutoBuildUpdate
         : AutoBuildSqlBase
     {
-        public SqlParamList GenerateSql<T>(T target, string fullTableName, string primaryKey)
+        public SqlParamList GenerateSql<T>(T target, string schema, string tableName, string primaryKey)
             where T : new()
         {
             var t = target.GetType();
@@ -43,7 +43,7 @@ namespace BasicDataLayers.DynamicStatements
             var sets = string.Join("," + Environment.NewLine, lstSetCols);
 
             var sql = 
-                $"UPDATE {fullTableName} SET " + Environment.NewLine + 
+                $"UPDATE {schema}.{tableName} SET " + Environment.NewLine + 
                 sets + Environment.NewLine + 
                 $"WHERE {pk.Name} = {sqlVariable}";
 

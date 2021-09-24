@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicDataLayers", "BasicDataLayers.csproj", "{90EE7A9A-9DDF-410F-B543-E355F4A09C10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicDataLayers.Tests", "..\BasicDataLayers.Tests\BasicDataLayers.Tests.csproj", "{2CD1ED99-8668-443E-B8F2-7D2BB4D409C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{90EE7A9A-9DDF-410F-B543-E355F4A09C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90EE7A9A-9DDF-410F-B543-E355F4A09C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90EE7A9A-9DDF-410F-B543-E355F4A09C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD1ED99-8668-443E-B8F2-7D2BB4D409C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD1ED99-8668-443E-B8F2-7D2BB4D409C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD1ED99-8668-443E-B8F2-7D2BB4D409C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD1ED99-8668-443E-B8F2-7D2BB4D409C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

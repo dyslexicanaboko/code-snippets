@@ -1,6 +1,10 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Linq;
 
 namespace BasicDataLayers
 {
@@ -48,6 +52,55 @@ namespace BasicDataLayers
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public static object GetScalar(IDataReader reader, string column)
+        {
+            object obj = null;
+
+            if (reader == null)
+                return null;
+
+            while (reader.Read())
+                obj = reader[column];
+
+            return obj;
+        }
+
+        protected static List<T> ToList<T>(IDataReader reader, Func<IDataReader, T> method) where T : new()
+        {
+            var lst = new List<T>();
+
+            if (reader == null)
+                return lst;
+
+            while (reader.Read())
+                lst.Add(method(reader));
+
+            return lst;
+        }
+
+        protected IDataReader ExecuteReaderText(string sql, params SqlParameter[] parameters)
+        {
+            return ExecuteReader(CommandType.Text, sql, parameters);
+        }
+
+        protected IDataReader ExecuteReaderSproc(string sql, params SqlParameter[] parameters)
+        {
+            return ExecuteReader(CommandType.StoredProcedure, sql, parameters);
+        }
+
+        private IDataReader ExecuteReader(CommandType commandType, string sql, SqlParameter[] parameters)
+        {
+            var con = new SqlConnection(ConnectionString);
+
+            con.Open();
+
+            var cmd = new SqlCommand(sql, con);
+            cmd.CommandType = commandType;
+            cmd.Parameters.AddRange(parameters);
+
+            return cmd.ExecuteReader(CommandBehavior.CloseConnection);
         }
     }
 }

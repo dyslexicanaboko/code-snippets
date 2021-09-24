@@ -28,8 +28,9 @@ namespace BasicDataLayers.DynamicStatements
             {typeof(decimal), SqlDbType.Decimal},
             {typeof(double), SqlDbType.Float},
             {typeof(byte), SqlDbType.TinyInt},
-            {typeof(TimeSpan), SqlDbType.Time}
-        };
+            {typeof(TimeSpan), SqlDbType.Time},
+            {typeof(Guid), SqlDbType.UniqueIdentifier}
+    };
 
         protected PropertyInfo GetPrimaryKey(Type type, string primaryKey)
         {

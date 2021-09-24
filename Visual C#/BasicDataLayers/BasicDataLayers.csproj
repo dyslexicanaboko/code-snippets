@@ -5,9 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DapperFlavor\" />
     <Folder Include="EfFluentApiFlavor\" />
-    <Folder Include="StaticStatements\" />
   </ItemGroup>
 
   <ItemGroup>

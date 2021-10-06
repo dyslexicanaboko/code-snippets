@@ -70,15 +70,15 @@ namespace BasicDataLayers.StaticStatements
 			var r = reader;
 
 			var e = new RudimentaryEntity();
-			e.PrimaryKey = Convert.ToInt32(r[""]);
-			e.DollarAmount = Convert.ToDecimal(r[""]);
-			e.ForeignKey = Convert.ToInt32(r[""]);
-			e.IsYes = Convert.ToBoolean(r[""]);
-			e.Label = Convert.ToString(r[""]);
-			e.LuckyNumber = Convert.ToInt32(r[""]);
-			e.MathCalculation = Convert.ToDouble(r[""]);
-			e.ReferenceId = Guid.Parse(Convert.ToString(r[""]));
-			e.RightNow = Convert.ToDateTime(r[""]);
+			e.PrimaryKey = Convert.ToInt32(r["PrimaryKey"]);
+			e.DollarAmount = Convert.ToDecimal(r["DollarAmount"]);
+			e.ForeignKey = Convert.ToInt32(r["ForeignKey"]);
+			e.IsYes = Convert.ToBoolean(r["IsYes"]);
+			e.Label = Convert.ToString(r["Label"]);
+			e.LuckyNumber = Convert.ToInt32(r["LuckyNumber"]);
+			e.MathCalculation = Convert.ToDouble(r["MathCalculation"]);
+			e.ReferenceId = Guid.Parse(Convert.ToString(r["ReferenceId"]));
+			e.RightNow = Convert.ToDateTime(r["RightNow"]);
 
 			return e;
 		}

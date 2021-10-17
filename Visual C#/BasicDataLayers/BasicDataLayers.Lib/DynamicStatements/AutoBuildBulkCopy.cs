@@ -15,7 +15,7 @@ namespace BasicDataLayers.Lib.DynamicStatements
 
             var properties = GetProperties(t, primaryKey);
 
-            var dt = ToDataTable(source, properties);
+            var dt = ToDataTable(source, properties, false);
 
             var map = GetColumnMapping(properties);
 
@@ -39,20 +39,26 @@ namespace BasicDataLayers.Lib.DynamicStatements
         {
             var t = typeof(T);
 
-            var properties = GetProperties(t, primaryKey);
+            var properties = GetProperties(t);
 
-            var dt = ToDataTable(source, properties);
+            var dt = ToDataTable(source, properties, true);
 
             var sqlTemplate = GetUpdateTemplate(schema, tableName, primaryKey, properties);
 
-            using (var connection = new SqlConnection(ConnectionString))
+            //This is a slow operation, so the connection and command wait time should be high
+            var cb = new SqlConnectionStringBuilder(ConnectionString);
+            cb.CommandTimeout = 0;
+            cb.ConnectTimeout = 0;
+
+            var cs = cb.ToString();
+
+            using (var connection = new SqlConnection(cs))
             {
                 using (var adapter = new SqlDataAdapter())
                 {
                     adapter.UpdateBatchSize = 5000;
                     adapter.UpdateCommand = new SqlCommand(sqlTemplate.Sql, connection);
                     adapter.UpdateCommand.UpdatedRowSource = UpdateRowSource.None;
-
                     adapter.UpdateCommand.Parameters.AddRange(sqlTemplate.Parameters);
 
                     adapter.Update(dt);
@@ -60,33 +66,40 @@ namespace BasicDataLayers.Lib.DynamicStatements
             }
         }
 
-        private SqlParamList GetUpdateTemplate(string schema, string tableName, string primaryKey, PropertyInfo[] properties)
+        private SqlParamList GetUpdateTemplate(string schema, string tableName, string primaryKey, PropertyInfo[] propertiesAll)
         {
-            //Column set count plus PK
-            var arr = new SqlParameter[properties.Length + 1];
+            var arr = new SqlParameter[propertiesAll.Length];
 
-            var lstSetCols = new List<string>(properties.Length);
+            var propertiesNoPk = GetProperties(propertiesAll, primaryKey);
+
+            var lstSetCols = new List<string>(propertiesAll.Length);
 
             string sqlVariable;
 
-            for (var c = 0; c < properties.Length; c++)
+            for (var c = 0; c < propertiesNoPk.Length; c++)
             {
-                sqlVariable = $"@c{c}";
+                var p = propertiesNoPk[c];
 
-                var colProperty = properties[c];
+                sqlVariable = $"@{p.Name}";
+
+                var colProperty = propertiesNoPk[c];
 
                 lstSetCols.Add($"{colProperty.Name} = {sqlVariable}");
 
-                var p = GetParam(colProperty, sqlVariable);
-
-                arr[c] = p;
+                var parameter = GetParam(colProperty, sqlVariable);
+                parameter.SourceColumn = p.Name;
+                
+                arr[c] = parameter;
             }
 
-            sqlVariable = "@pk";
+            var pk = GetPrimaryKey(propertiesAll, primaryKey);
+            
+            sqlVariable = $"@{pk.Name}";
 
-            var pk = GetPrimaryKey(properties, primaryKey);
+            var pkParameter = GetParam(pk, sqlVariable);
+            pkParameter.SourceColumn = pk.Name;
 
-            arr[properties.Length] = GetParam(pk, sqlVariable);
+            arr[propertiesAll.Length - 1] = pkParameter;
 
             var sets = string.Join("," + Environment.NewLine, lstSetCols);
 

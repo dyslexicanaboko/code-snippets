@@ -9,4 +9,5 @@
 	,MathCalculation float NOT NULL
 	,Label VARCHAR(500) NOT NULL
 	,RightNow DateTime2(7) NOT NULL
+	,CONSTRAINT [PK_dbo.RudimentaryEntity_PrimaryKey] PRIMARY KEY CLUSTERED ([PrimaryKey])
 )

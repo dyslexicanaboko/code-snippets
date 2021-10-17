@@ -1,8 +1,10 @@
 ﻿using BasicDataLayers.Lib.DynamicStatements;
 using BasicDataLayers.Lib.Entities;
+using BasicDataLayers.Lib.StaticStatements;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BasicDataLayers.Tests
 {
@@ -28,15 +30,7 @@ namespace BasicDataLayers.Tests
                 pk = Convert.ToInt32(GetScalar(dr, "PK"));
             }
 
-            e.PrimaryKey = pk;
-            e.ForeignKey = 20;
-            e.ReferenceId = Guid.NewGuid();
-            e.IsYes = !e.IsYes;
-            e.LuckyNumber = 8;
-            e.DollarAmount = 255.67M;
-            e.MathCalculation = new Random().NextDouble();
-            e.Label = "Updating what was inserted";
-            e.RightNow = DateTime.UtcNow;
+            UpdateObject(e, pk);
 
             var update = bld.GetUpdateSql(e, Schema, Table, nameof(RudimentaryEntity.PrimaryKey));
 
@@ -58,6 +52,46 @@ namespace BasicDataLayers.Tests
             }
 
             AssertAreEqual(e, a);
+        }
+
+        //If there is too much crap in the table truncate it, it will take too long for this to execute
+        //TRUNCATE TABLE dbo.RudimentaryEntity
+        [Test]
+        public void BulkInsertBulkUpdate()
+        {
+            var bld = new AutoBuildBulkCopy();
+            var repo = new RudimentaryRepository();
+
+            var c = new RudimentaryEntity();
+            var lst = new List<RudimentaryEntity>(BulkOperationCap);
+
+            for (var i = 0; i < lst.Capacity; i++)
+            {
+                //This is adding the same ref repeatedly, but the database doesn't know any different
+                lst.Add(c);
+            }
+
+            bld.BulkInsert(lst, Schema, Table, nameof(RudimentaryEntity.PrimaryKey));
+
+            //This is a crappy way to do this, but these are crappy tests so I don't care. Just making sure I select the same objects is all.
+            var lstInserted = repo.SelectAll().TakeLast(lst.Capacity).ToList();
+
+            foreach (var u in lstInserted)
+            {
+                UpdateObject(u);
+            }
+            
+            bld.BulkUpdate(lstInserted, Schema, Table, nameof(RudimentaryEntity.PrimaryKey));
+
+            var lstUpdated = repo.SelectAll().TakeLast(lst.Capacity).ToList();
+
+            for (var i = 0; i < lstInserted.Count; i++)
+            {
+                var e = lstInserted[i];
+                var a = lstUpdated[i];
+
+                AssertAreEqual(e, a);
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace BasicDataLayers.Tests
     {
         protected const string Schema = "dbo";
         protected const string Table = nameof(RudimentaryEntity);
+        protected const int BulkOperationCap = 5000;
 
         /*
         using (IDataReader dr = ExecuteReaderText(insert.Sql, insert.Parameters))
@@ -51,6 +52,25 @@ namespace BasicDataLayers.Tests
             e.RightNow = Convert.ToDateTime(r["RightNow"]);
 
             return e;
+        }
+
+        protected void UpdateObject(RudimentaryEntity u, int primaryKey)
+        {
+            u.PrimaryKey = primaryKey;
+
+            UpdateObject(u);
+        }
+
+        protected void UpdateObject(RudimentaryEntity u)
+        {
+            u.ForeignKey = 20;
+            u.ReferenceId = Guid.NewGuid();
+            u.IsYes = !u.IsYes;
+            u.LuckyNumber = 8;
+            u.DollarAmount = 255.67M;
+            u.MathCalculation = new Random().NextDouble();
+            u.Label = "Updating what was inserted";
+            u.RightNow = DateTime.UtcNow;
         }
 
         protected void AssertAreEqual(RudimentaryEntity e, RudimentaryEntity a)

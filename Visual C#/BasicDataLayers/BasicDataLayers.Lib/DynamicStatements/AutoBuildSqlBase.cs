@@ -63,6 +63,22 @@ namespace BasicDataLayers.Lib.DynamicStatements
             return arr;
         }
 
+        protected PropertyInfo[] GetProperties(IEnumerable<PropertyInfo> properties, string primaryKeyToExclude)
+        {
+            var pk = primaryKeyToExclude;
+
+            if (pk != null)
+            {
+                properties = properties.Where(x => !x.Name.Equals(pk, StringComparison.InvariantCultureIgnoreCase));
+            }
+
+            var arr = properties
+                .OrderBy(x => x.Name)
+                .ToArray();
+
+            return arr;
+        }
+
         protected SqlParameter GetParam(PropertyInfo column, string parameterName, object objectSource)
         {
             var p = GetParam(column, parameterName);
@@ -99,7 +115,7 @@ namespace BasicDataLayers.Lib.DynamicStatements
             return dt;
         }
 
-        protected DataTable ToDataTable<T>(IEnumerable<T> source, PropertyInfo[] properties)
+        protected DataTable ToDataTable<T>(IEnumerable<T> source, PropertyInfo[] properties, bool forUpdate)
         {
             var dt = GetSchema(properties);
 
@@ -115,6 +131,17 @@ namespace BasicDataLayers.Lib.DynamicStatements
                 }
 
                 dt.Rows.Add(dr);
+            }
+
+            if (!forUpdate) return dt;
+            
+            //To avoid getting an error during update the following things have to happen to the
+            //data table so that the Data Adapter doesn't think this is an insert operation
+            dt.AcceptChanges();
+
+            foreach (DataRow r in dt.Rows)
+            {
+                r.SetModified();
             }
 
             return dt;

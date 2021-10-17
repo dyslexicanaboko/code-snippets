@@ -14,7 +14,8 @@ namespace BasicDataLayers.Lib.StaticStatements
 		{
 			var sql = @"
 			SELECT
-				 DollarAmount
+				 PrimaryKey
+				,DollarAmount
 				,ForeignKey
 				,IsYes
 				,Label
@@ -83,7 +84,8 @@ namespace BasicDataLayers.Lib.StaticStatements
 			return e;
 		}
 
-		public void Insert(RudimentaryEntity entity)
+		//Preference on whether or not insert method returns a value is up to the user and the object being inserted
+		public int Insert(RudimentaryEntity entity)
 		{
 			var sql = @"INSERT INTO dbo.RudimentaryEntity (
 				 DollarAmount
@@ -101,7 +103,9 @@ namespace BasicDataLayers.Lib.StaticStatements
 				,@LuckyNumber
 				,@MathCalculation
 				,@ReferenceId
-				,@RightNow)";
+				,@RightNow)
+
+			 SELECT SCOPE_IDENTITY() AS PK;";
 
 			SqlParameter p = null;
 
@@ -165,8 +169,13 @@ namespace BasicDataLayers.Lib.StaticStatements
 			p.Size = 0; //DATETIME2(0)
 
 			lst.Add(p);
-			
-			ExecuteNonQuery(sql, lst.ToArray());
+
+			using (var dr = ExecuteReaderText(sql, lst.ToArray()))
+			{
+				//dr.Read();
+
+				return Convert.ToInt32(GetScalar(dr, "PK"));
+			}
 		}
 
 		public void Update(RudimentaryEntity entity)

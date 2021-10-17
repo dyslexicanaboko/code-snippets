@@ -27,6 +27,14 @@ namespace BasicDataLayers.Tests
             }
         }
 
+        //protected object ExecuteScalar(string sql, params SqlParameter[] parameters)
+        //{
+        //    using (var dr = ExecuteReaderText(sql, parameters))
+        //    {
+        //        return GetScalar(dr, "PK");
+        //    }
+        //}
+
         protected RudimentaryEntity ToEntity(IDataReader reader)
         {
             var r = reader;

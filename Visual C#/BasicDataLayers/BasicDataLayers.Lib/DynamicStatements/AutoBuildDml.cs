@@ -9,10 +9,10 @@ namespace BasicDataLayers.Lib.DynamicStatements
     public class AutoBuildDml
         : AutoBuildSqlBase
     {
-        public SqlParamList GetSelectByPrimaryKeySql<T>(T target, string schema, string tableName, string primaryKey)
+        public SqlParamList GetSelectByPrimaryKeySql<T>(string schema, string tableName, string primaryKey, object primaryKeyValue)
             where T : new()
         {
-            var t = target.GetType();
+            var t = typeof(T);
 
             var properties = GetProperties(t);
 
@@ -22,7 +22,8 @@ namespace BasicDataLayers.Lib.DynamicStatements
 
             var pkVariable = $"@{pk.Name}";
 
-            var pkParam = GetParam(pk, pkVariable, target);
+            var pkParam = GetParam(pk, pkVariable);
+            pkParam.Value = primaryKeyValue;
 
             var selectList = string.Join("," + Environment.NewLine, lstSetCols);
 

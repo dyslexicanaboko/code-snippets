@@ -3,7 +3,7 @@ using BasicDataLayers.Lib.Entities;
 using NUnit.Framework;
 using System.Collections.Generic;
 
-namespace BasicDataLayers.Lib.Tests
+namespace BasicDataLayers.Tests
 {
     /// <summary>
     /// These are bad tests, I just use these to run the code, not to assert anything.

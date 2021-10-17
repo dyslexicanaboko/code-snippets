@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace BasicDataLayers.DynamicStatements
+namespace BasicDataLayers.Lib.DynamicStatements
 {
     /// <summary>
     /// Dynamically generated SQL accompanied by labeled and loaded SQL Parameter objects.

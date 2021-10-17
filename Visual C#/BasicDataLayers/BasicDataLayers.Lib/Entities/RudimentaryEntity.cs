@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BasicDataLayers.Entities
+namespace BasicDataLayers.Lib.Entities
 {
     /// <summary>
     /// Capturing some of the more rudimentary properties I have seen to test things that are the most common

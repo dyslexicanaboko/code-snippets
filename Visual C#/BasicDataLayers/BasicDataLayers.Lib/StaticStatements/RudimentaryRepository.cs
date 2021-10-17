@@ -1,11 +1,11 @@
-﻿using BasicDataLayers.Entities;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using BasicDataLayers.Lib.Entities;
 
-namespace BasicDataLayers.StaticStatements
+namespace BasicDataLayers.Lib.StaticStatements
 {
 	public class RudimentaryRepository
 		: BaseDal

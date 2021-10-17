@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BasicDataLayers\BasicDataLayers.csproj" />
+    <ProjectReference Include="..\BasicDataLayers.Lib\BasicDataLayers.Lib.csproj" />
   </ItemGroup>
 
 </Project>

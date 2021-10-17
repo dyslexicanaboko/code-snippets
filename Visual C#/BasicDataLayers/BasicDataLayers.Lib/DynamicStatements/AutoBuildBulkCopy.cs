@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 
-namespace BasicDataLayers.DynamicStatements
+namespace BasicDataLayers.Lib.DynamicStatements
 {
     public class AutoBuildBulkCopy
         : AutoBuildSqlBase

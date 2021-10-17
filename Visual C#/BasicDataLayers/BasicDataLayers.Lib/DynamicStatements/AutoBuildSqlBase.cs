@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Microsoft.Data.SqlClient;
 
-namespace BasicDataLayers.DynamicStatements
+namespace BasicDataLayers.Lib.DynamicStatements
 {
     public abstract class AutoBuildSqlBase
         : BaseDal

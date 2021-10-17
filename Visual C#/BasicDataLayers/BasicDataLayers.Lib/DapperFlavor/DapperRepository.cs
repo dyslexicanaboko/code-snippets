@@ -1,10 +1,10 @@
-﻿using BasicDataLayers.Entities;
-using Dapper;
+﻿using Dapper;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using System.Linq;
+using BasicDataLayers.Lib.Entities;
 
-namespace BasicDataLayers.DapperFlavor
+namespace BasicDataLayers.Lib.DapperFlavor
 {
     public class DapperRepository
 		: BaseDal

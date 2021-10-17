@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BasicDataLayers.DynamicStatements
+namespace BasicDataLayers.Lib.DynamicStatements
 {
     public class AutoBuildDml
         : AutoBuildSqlBase

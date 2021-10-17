@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 
-namespace BasicDataLayers
+namespace BasicDataLayers.Lib
 {
     /// <summary>
     /// The Base DAL only exists to provide access to the connection string and for basic ADO.NET functionality

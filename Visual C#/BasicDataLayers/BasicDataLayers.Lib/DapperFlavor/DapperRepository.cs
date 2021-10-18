@@ -1,9 +1,9 @@
-﻿using Dapper;
+﻿using BasicDataLayers.Lib.Entities;
+using Dapper;
 using Microsoft.Data.SqlClient;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using BasicDataLayers.Lib.Entities;
 
 namespace BasicDataLayers.Lib.DapperFlavor
 {

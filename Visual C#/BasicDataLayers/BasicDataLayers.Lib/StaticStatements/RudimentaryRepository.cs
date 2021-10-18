@@ -1,9 +1,9 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using BasicDataLayers.Lib.Entities;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using BasicDataLayers.Lib.Entities;
 
 namespace BasicDataLayers.Lib.StaticStatements
 {
@@ -26,10 +26,7 @@ namespace BasicDataLayers.Lib.StaticStatements
 			FROM dbo.RudimentaryEntity
 			WHERE PrimaryKey = @PrimaryKey";
 
-			var p = new SqlParameter();
-			p.ParameterName = "@PrimaryKey";
-			p.SqlDbType = SqlDbType.Int;
-			p.Value = primaryKey;
+			var p = GetPrimaryKeyParameter(primaryKey);
 
 			using (var dr = ExecuteReaderText(sql, p))
 			{
@@ -66,24 +63,6 @@ namespace BasicDataLayers.Lib.StaticStatements
 			}
 		}
 
-		private RudimentaryEntity ToEntity(IDataReader reader)
-		{
-			var r = reader;
-
-			var e = new RudimentaryEntity();
-			e.PrimaryKey = Convert.ToInt32(r["PrimaryKey"]);
-			e.DollarAmount = Convert.ToDecimal(r["DollarAmount"]);
-			e.ForeignKey = Convert.ToInt32(r["ForeignKey"]);
-			e.IsYes = Convert.ToBoolean(r["IsYes"]);
-			e.Label = Convert.ToString(r["Label"]);
-			e.LuckyNumber = Convert.ToInt32(r["LuckyNumber"]);
-			e.MathCalculation = Convert.ToDouble(r["MathCalculation"]);
-			e.ReferenceId = Guid.Parse(Convert.ToString(r["ReferenceId"]));
-			e.RightNow = Convert.ToDateTime(r["RightNow"]);
-
-			return e;
-		}
-
 		//Preference on whether or not insert method returns a value is up to the user and the object being inserted
 		public int Insert(RudimentaryEntity entity)
 		{
@@ -107,68 +86,7 @@ namespace BasicDataLayers.Lib.StaticStatements
 
 			 SELECT SCOPE_IDENTITY() AS PK;";
 
-			SqlParameter p = null;
-
-			var lst = new List<SqlParameter>();
-
-			p = new SqlParameter();
-			p.ParameterName = "@DollarAmount";
-			p.SqlDbType = SqlDbType.Decimal;
-			p.Value = entity.DollarAmount;
-
-			lst.Add(p);
-
-			p = new SqlParameter();
-			p.ParameterName = "@ForeignKey";
-			p.SqlDbType = SqlDbType.Int;
-			p.Value = entity.ForeignKey;
-
-			lst.Add(p);
-
-			p = new SqlParameter();
-			p.ParameterName = "@IsYes";
-			p.SqlDbType = SqlDbType.Bit;
-			p.Value = entity.IsYes;
-
-			lst.Add(p);
-			
-			p = new SqlParameter();
-			p.ParameterName = "@Label";
-			p.SqlDbType = SqlDbType.VarChar;
-			p.Value = entity.Label;
-			p.Size = 50; //This is made up
-
-			lst.Add(p);
-
-			p = new SqlParameter();
-			p.ParameterName = "@LuckyNumber";
-			p.SqlDbType = SqlDbType.Int;
-			p.Value = entity.LuckyNumber;
-
-			lst.Add(p);
-
-			p = new SqlParameter();
-			p.ParameterName = "@MathCalculation";
-			p.SqlDbType = SqlDbType.Float;
-			p.Value = entity.MathCalculation;
-			p.Size = 53; //FLOAT(53) is supposed to be equivalent of Double
-
-			lst.Add(p);
-			
-			p = new SqlParameter();
-			p.ParameterName = "@ReferenceId";
-			p.SqlDbType = SqlDbType.UniqueIdentifier;
-			p.Value = entity.ReferenceId;
-
-			lst.Add(p);
-			
-			p = new SqlParameter();
-			p.ParameterName = "@RightNow";
-			p.SqlDbType = SqlDbType.DateTime2;
-			p.Value = entity.RightNow;
-			p.Size = 0; //DATETIME2(0)
-
-			lst.Add(p);
+			var lst = GetParameters(entity);
 
 			using (var dr = ExecuteReaderText(sql, lst.ToArray()))
 			{
@@ -191,6 +109,27 @@ namespace BasicDataLayers.Lib.StaticStatements
 						,RightNow = @RightNow
 					WHERE PrimaryKey = @PrimaryKey";
 
+			var lst = GetParameters(entity);
+
+			var p = GetPrimaryKeyParameter(entity.PrimaryKey);
+
+			lst.Add(p);
+
+			ExecuteNonQuery(sql, lst.ToArray());
+		}
+
+		private SqlParameter GetPrimaryKeyParameter(int primaryKey)
+		{
+			var p = new SqlParameter();
+			p.ParameterName = "@PrimaryKey";
+			p.SqlDbType = SqlDbType.Int;
+			p.Value = primaryKey;
+
+			return p;
+		}
+
+		private List<SqlParameter> GetParameters(RudimentaryEntity entity)
+		{
 			SqlParameter p = null;
 
 			var lst = new List<SqlParameter>();
@@ -254,14 +193,25 @@ namespace BasicDataLayers.Lib.StaticStatements
 
 			lst.Add(p);
 
-			p = new SqlParameter();
-			p.ParameterName = "@PrimaryKey";
-			p.SqlDbType = SqlDbType.Int;
-			p.Value = entity.PrimaryKey;
+			return lst;
+		}
 
-			lst.Add(p);
+		private RudimentaryEntity ToEntity(IDataReader reader)
+		{
+			var r = reader;
 
-			ExecuteNonQuery(sql, lst.ToArray());
+			var e = new RudimentaryEntity();
+			e.PrimaryKey = Convert.ToInt32(r["PrimaryKey"]);
+			e.DollarAmount = Convert.ToDecimal(r["DollarAmount"]);
+			e.ForeignKey = Convert.ToInt32(r["ForeignKey"]);
+			e.IsYes = Convert.ToBoolean(r["IsYes"]);
+			e.Label = Convert.ToString(r["Label"]);
+			e.LuckyNumber = Convert.ToInt32(r["LuckyNumber"]);
+			e.MathCalculation = Convert.ToDouble(r["MathCalculation"]);
+			e.ReferenceId = Guid.Parse(Convert.ToString(r["ReferenceId"]));
+			e.RightNow = Convert.ToDateTime(r["RightNow"]);
+
+			return e;
 		}
 	}
 }

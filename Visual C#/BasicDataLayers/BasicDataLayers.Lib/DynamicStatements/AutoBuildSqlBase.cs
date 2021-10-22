@@ -30,7 +30,7 @@ namespace BasicDataLayers.Lib.DynamicStatements
             {typeof(byte), SqlDbType.TinyInt},
             {typeof(TimeSpan), SqlDbType.Time},
             {typeof(Guid), SqlDbType.UniqueIdentifier}
-    };
+        };
 
         protected PropertyInfo GetPrimaryKey(Type type, string primaryKey)
         {

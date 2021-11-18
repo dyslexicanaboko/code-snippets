@@ -1,0 +1,66 @@
+﻿MERGE dbo.Purchaser AS target
+USING (	VALUES
+	 ('Billy', 'Madison')
+	,('Johnny', 'Bravo')
+	,('Theresa', 'Mae')
+	,('Stephani', 'Brite')
+	,('Lilli', 'Calder')
+	,('Celia', 'Reveles')
+	,('Kristie', 'Crosley')
+	,('Imelda', 'Sneed')
+	,('Donnell', 'Tatum')
+	,('Lisandra', 'Mcanulty')
+	,('Irma', 'Digregorio')
+	,('Tosha', 'Odoms')
+	,('Adria', 'Romig')
+	,('Genny', 'Howze')
+	,('Marya', 'Grimmer')
+	,('Alma', 'Weimar')
+	,('Chiquita', 'Boyter')
+	,('Meg', 'Mcginn')
+	,('Kristan', 'Voight')
+	,('Takisha', 'Hampton')
+	,('Jessenia', 'Arras')
+	,('Kali', 'Mckell')
+	,('Vincenzo', 'Bove')
+	,('Julianne', 'Hopes')
+	,('Dorine', 'Slater')
+	,('Nila', 'Massenburg')
+	,('Tatiana', 'Planck')
+	,('Dwayne', 'Dumbleton')
+	,('Willa', 'Sturdivant')
+	,('Von', 'Palm')
+	,('Yuko', 'Oberle')
+	,('Jacquelin', 'Ferri')
+	,('Gladis', 'Lederman')
+	,('Fannie', 'Paavola')
+	,('Tessa', 'Lytch')
+	,('Lavonia', 'Roane')
+	,('Anastasia', 'Deardorff')
+	,('Cary', 'Paradis')
+	,('Rich', 'Conatser')
+	,('Tomoko', 'Duren')
+	,('Marivel', 'Herman')
+	,('Karly', 'Pascarelli')
+	,('Jim', 'Bontrager')
+	,('Tonya', 'Delph')
+	,('Eugenio', 'Macinnis')
+	,('Lyle', 'Boon')
+	,('Cleta', 'Sinnott')
+	,('Inger', 'Hartness')
+	,('Ozella', 'Haubrich')
+	,('Martine', 'Strite')
+)
+AS source 
+(
+	 [FirstName]
+	,[LastName]
+)  
+ON (
+	target.[FirstName] = source.[FirstName]
+	AND 
+	target.[LastName] = source.[LastName]
+)
+WHEN NOT MATCHED THEN  
+	INSERT ([FirstName], [LastName])  
+	VALUES (source.[FirstName], source.[LastName]);

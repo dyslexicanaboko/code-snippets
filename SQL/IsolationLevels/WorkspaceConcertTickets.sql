@@ -1,3 +1,6 @@
+USE Semaphores
+GO
+
 SELECT
     t.TicketId,
 	t.ConcertId,

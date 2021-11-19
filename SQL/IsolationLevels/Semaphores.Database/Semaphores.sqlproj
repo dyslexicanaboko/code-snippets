@@ -73,8 +73,18 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Purchaser.sql" />
+    <Build Include="dbo\Tables\ExclusiveSlot.sql" />
+    <Build Include="dbo\Tables\ExclusiveSlotSharedDate.sql" />
+    <None Include="Deployments\Post\Seed.dbo.ExclusiveSlotSharedDate.sql" />
+    <None Include="Deployments\Post\Seed.dbo.ExclusiveSlot.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\ResetTickets.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\ResetExclusiveSlot.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\FillExclusiveSlot.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Ticket.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Semaphores.publish.xml" />
   </ItemGroup>
 </Project>

@@ -25,3 +25,15 @@ PRINT '$(scriptName)'
 :r $(d)$(scriptName)
 
 GO
+
+:setvar scriptName "Seed.dbo.ExclusiveSlotSharedDate.sql"
+PRINT '$(scriptName)'
+:r $(d)$(scriptName)
+
+GO
+
+:setvar scriptName "Seed.dbo.ExclusiveSlot.sql"
+PRINT '$(scriptName)'
+:r $(d)$(scriptName)
+
+GO

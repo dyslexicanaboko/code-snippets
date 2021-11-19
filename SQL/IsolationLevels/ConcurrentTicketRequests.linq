@@ -2,8 +2,7 @@
   <Connection>
     <ID>840a0411-106f-4328-a770-2618871991a5</ID>
     <NamingServiceVersion>2</NamingServiceVersion>
-    <Persist>true</Persist>
-    <Server>.\SQLSERVER2014</Server>
+    <Server>.</Server>
     <DeferDatabasePopulation>true</DeferDatabasePopulation>
     <Database>Semaphores</Database>
   </Connection>
@@ -12,15 +11,13 @@
 </Query>
 
 //const int MaxTries = 10;
-
+const int ConcertId = 1;
 /*
 	The goal here is to hammer the database for ticket requests and 
-	make sure no one is able to assign the same ticket twice.
+	make sure no one is able to assign the same ticket more than one time.
 */
 void Main()
 {
-	//PurchaseTicket(1);
-	//Connection.ConnectionString.Dump();
 	HammerTicketSales();
 }
 
@@ -30,21 +27,26 @@ private void HammerTicketSales()
 {	
 	ResetData();
 	
-	//Make every purchaser their own parallel task
 	var lst = Purchasers.ToList();
 
-	HammerTicketSales(1, lst, 1);
+	HammerTicketSales(1, lst, ConcertId);
 
 	Console.WriteLine("Finished");
 }
 
 private void ResetData()
 {
-	ExecuteCommand(
-	@"UPDATE dbo.Ticket SET 
-	 	 PurchaserId = NULL
-		,PurchasedOn = NULL
-	  WHERE ConcertId = 1");
+	ExecuteCommand("ResetTickets @concertId = {0}", ConcertId);
+
+	if (!Tickets.Any())
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			Tickets.InsertOnSubmit(new Ticket { ConcertId = ConcertId });
+		}
+		
+		SubmitChanges();
+	}
 }
 
 private void HammerTicketSales(int run, List<Purchaser> purchasers, int concertId)
@@ -60,6 +62,8 @@ private void HammerTicketSales(int run, List<Purchaser> purchasers, int concertI
 
 	_results = new ConcurrentBag<Result>();
 
+	Console.WriteLine($"Threads: {purchasers.Count}");
+	
 	//Using Parallel ForEach so that the execution is randomized naturally
 	Parallel.ForEach(purchasers, x => PurchaseTicket(x, concertId));
 

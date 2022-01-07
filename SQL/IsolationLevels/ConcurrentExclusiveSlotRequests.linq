@@ -72,12 +72,33 @@ private List<RowAndSlot> HammerOneRowStrategy(int repetition)
 	return lst;
 }
 
+//Use row one repeatedly and hammer it with slot updates N times
+private List<RowAndSlot> HammerOneSlotStrategy(int repetition)
+{
+	var lst = new List<RowAndSlot>();
+
+	var v = 0;
+
+	for (int r = 0; r < repetition; r++)
+	{
+		for (int s = 0; s < 10; s++)
+		{
+			var row = new RowAndSlot(1, 0, v++);
+
+			lst.Add(row);
+		}
+	}
+
+	return lst;
+}
+
 private void FillSlots()
 {
 	_results = new ConcurrentBag<RowAndSlot>();
 
 	//var lst = OneToOneStrategy(10);
 	var lst = HammerOneRowStrategy(10);
+	//var lst = HammerOneSlotStrategy(10);
 
 	Console.WriteLine($"Threads: {lst.Count}");
 
@@ -100,7 +121,7 @@ private void FillSlots()
 // Define other methods and classes here
 private void FillSlot(RowAndSlot row)
 {
-	Console.Write($"({row.RowNumber}, {row.SlotIndex}) | ");
+	Console.Write($"({row.RowNumber}, {row.SlotIndex}, {row.Value}) | ");
 	
 	var r = row;
 	
@@ -145,6 +166,7 @@ private void Exec(string storedProcedureName, params object[] parameters)
 
 			cmd.Parameters.Add(new SqlParameter("exclusiveSlotId", parameters[0]));
 			cmd.Parameters.Add(new SqlParameter("slotIndex", parameters[1]));
+			cmd.Parameters.Add(new SqlParameter("value", parameters[2]));
 			
 			cmd.ExecuteNonQuery();
 		}

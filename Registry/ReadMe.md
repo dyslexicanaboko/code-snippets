@@ -4,6 +4,7 @@ Just be aware that restarting your machine or application can potentially undo t
 # Outlook auto complete
 - Outlook auto complete.bat
 - Outlook auto complete.reg
+
 Use when Outlook's autocomplete for looking up contacts on the To line is disabled by your organization. Just be aware that you may have to run this every time you reopen Outlook or restart your computer depending on your organization's settings.
 
 # Registry Excel TFS plugin.reg

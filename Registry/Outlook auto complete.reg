@@ -1,0 +1,4 @@
+; https://answers.microsoft.com/en-us/msoffice/forum/msoffice_outlook-mso_winother-mso_o365b/unable-to-tick-box-use-auto-complete-list-to/edb8c615-42cb-4dab-977d-c6f4d49a7134
+; https://superuser.com/questions/380156/delete-registry-key-or-value-via-a-cmd-script/1041579
+; CMD> reg delete HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\Outlook\preferences /v showautosug /f
+[-HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Office\16.0\Outlook\preferences\showautosug]

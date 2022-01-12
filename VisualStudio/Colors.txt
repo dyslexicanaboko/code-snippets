@@ -1,0 +1,37 @@
+Font: Courier New
+
+Size: 14
+
+Plain Text:
+	Foreground: 220, 220, 220
+	Background: 30, 30, 30
+
+Line Number: 43, 145, 175 (R,G,B)
+
+Key word: 86,156, 214
+
+String: 214, 157, 133
+
+Number: 
+	VS: 181, 206, 168 
+	SSMS: 255, 255, 0
+
+Class: 78, 201, 176
+
+Methods: 220, 220, 170
+
+Comment: 87, 166, 74
+
+Highlight Current Line:
+	Foreground: 70, 70, 70
+	Background: 255, 255, 255
+
+Highlighted Variable
+	Foreground: 173, 192, 211
+	Background: 14, 69, 131
+	
+SSMS
+	Grid Results
+		Size: 14
+	
+	

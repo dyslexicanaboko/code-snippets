@@ -5,20 +5,20 @@ namespace UnitTestsProject
 {
     public abstract class TestBase
     {
-		protected DateTime YesterdayUtc { get; }
+	protected DateTime YesterdayUtc { get; }
     
-		protected DateTime TodayUtc { get; }
+	protected DateTime TodayUtc { get; }
 
-		protected DateTime TomorrowUtc { get; }
+	protected DateTime TomorrowUtc { get; }
 
-		protected TestBase()
-		{
-		  TodayUtc = DateTime.UtcNow.Date;
+	protected TestBase()
+	{
+	    TodayUtc = DateTime.UtcNow.Date;
 
-		  YesterdayUtc = TodayUtc.AddDays(-1);
+	    YesterdayUtc = TodayUtc.AddDays(-1);
 
-		  TomorrowUtc = TodayUtc.AddDays(1);
-		}
+	    TomorrowUtc = TodayUtc.AddDays(1);
+	}
 		
         //https://stackoverflow.com/a/9035421/603807
         /// <summary>

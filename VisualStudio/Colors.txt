@@ -30,8 +30,18 @@ Highlighted Variable
 	Foreground: 173, 192, 211
 	Background: 14, 69, 131
 	
+XML
+	Attribute: 146, 202, 244
+	Attribute Quotes: 128, 128, 128
+	Attribute Value: 200, 200, 200
+	CData Section: 233, 213, 133
+	Comment: 87, 166, 74
+	Delimiter: 128, 128, 128
+	Keyword: 86, 156, 214
+	Name: 86, 156, 214
+	Text: 200, 200, 200	
+	
 SSMS
 	Grid Results
 		Size: 14
-	
 	

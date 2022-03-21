@@ -10,7 +10,8 @@ Line Number: 43, 145, 175 (R,G,B)
 
 Key word: 86,156, 214
 
-String: 214, 157, 133
+String    : 214, 157, 133
+SQL String: 214, 157, 133
 
 Number: 
 	VS: 181, 206, 168 

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets>
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Capture statistics</Title>
+      <Shortcut>Statistics</Shortcut>
+      <Description>Surround SQL with Statistics and Time capture commands.</Description>
+      <Author />
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations />
+      <Code Language="sql"><![CDATA[--http://statisticsparser.com/
+        SET STATISTICS IO ON;
+        SET STATISTICS TIME ON;
+        GO
+        
+        $SELECTEDTEXT$
+        GO
+        
+        SET STATISTICS IO OFF;
+        SET STATISTICS TIME OFF;]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

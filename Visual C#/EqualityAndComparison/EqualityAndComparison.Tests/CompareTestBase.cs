@@ -2,7 +2,7 @@
 
 namespace EqualityAndComparison.Tests
 {
-    internal abstract class CompareTestBase<T>
+    public abstract class CompareTestBase<T>
         : TestBase
         where T : class, IEquatable<T>, new()
     {

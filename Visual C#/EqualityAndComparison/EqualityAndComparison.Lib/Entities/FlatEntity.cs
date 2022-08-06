@@ -20,6 +20,7 @@
 
 
 		//From IEquatable<T> which is necessary for correctly using methods like .Distinct()
+		//Will not work if THIS object is null
 		public bool Equals(FlatEntity other)
 		{
 			//Check if the right hand argument is null
@@ -70,6 +71,7 @@
 		}
 
 		//Optionally you can override the equality operator.
+		//This is excellent to use if you don't know if Left or Right hand sides are null
 		public static bool operator ==(FlatEntity lhs, FlatEntity rhs)
 		{
 			if (lhs is null)
@@ -88,6 +90,7 @@
 		}
 
 		//Optionally you can override the not-equal operator.
+		//Just the inverse of ==
 		public static bool operator !=(FlatEntity lhs, FlatEntity rhs) => !(lhs == rhs);
 	}
 }

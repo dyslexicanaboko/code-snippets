@@ -33,9 +33,9 @@
 			 * has lists in it, this now introduces new complexities:
 			 *   1. Are the lists distinct? This will be the biggest problem by far. 
 			 *   2. When comparing strings does case matter? */
-			var areEqualSequence = Sequence.SequenceEqual(other.Sequence);
-			var areEqualSqlKeywords = SqlKeyWords.SequenceEqual(other.SqlKeyWords);
-			var areEqualCompoundEntities = CompoundEntities.SequenceEqual(other.CompoundEntities);
+			var areEqualSequence = Sequence.AreDistinctListsEqual(other.Sequence);
+			var areEqualSqlKeywords = SqlKeyWords.AreDistinctListsEqual(other.SqlKeyWords);
+			var areEqualCompoundEntities = CompoundEntities.AreDistinctListsEqual(other.CompoundEntities);
 
 			//For the sake of debugging, it's a good idea to keep the
 			//result of each complex compare in a separate variable.

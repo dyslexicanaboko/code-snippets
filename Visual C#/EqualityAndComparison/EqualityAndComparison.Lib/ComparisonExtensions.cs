@@ -63,6 +63,67 @@
             //return true;
         }
 
-        //TODO: Subjective usage of AreListsEqual() where elements do not have to be distinct
+        //Subjective comparison of Lists where elements do not have to be distinct.
+        //Instead if one list is a subset of the other, then they can loosely be considered equal
+        public static bool IsFuzzySubset<T>(
+          this IReadOnlyList<T> left,
+          IReadOnlyList<T> right,
+          IEqualityComparer<T> comparer = null)
+          where T : IEquatable<T>
+        {
+            if (left == null && right == null) return true;
+
+            if (left == null ^ right == null) return false;
+
+            var doubleCheck = false;
+            IReadOnlyList<T> smaller;
+            IReadOnlyList<T> larger;
+
+            //Figuring out which list is larger, where equals is arbitrary
+            if (left.Count <= right.Count)
+            {
+                smaller = left;
+                larger = right;
+
+                //If they are equal, unfortunately a double check has to be performed.
+                doubleCheck = left.Count == right.Count;
+            }
+            else
+            {
+                smaller = right;
+                larger = left;
+            }
+
+            var smallerVersusLarger = smaller.IsSubsetOf(larger);
+
+            //If every element in larger is found in smaller, they these are loosely equal
+            //if being distinct does not matter.
+            //Smaller must be a subset of larger for this to be true.
+            if (!doubleCheck) return smallerVersusLarger;
+
+            //If the counts are equal, then both lists have to be compared to one another unfortunately
+            var largerVersusSmaller = larger.IsSubsetOf(smaller);
+
+            return smallerVersusLarger && largerVersusSmaller;
+        }
+
+        public static bool IsSubsetOf<T>(
+          this IReadOnlyList<T> smaller,
+          IReadOnlyList<T> larger,
+          IEqualityComparer<T> comparer = null)
+          where T : IEquatable<T>
+        {
+            //Compare larger to smaller by looping the larger list
+            foreach (var item in larger)
+            {
+                //Search smaller list for a shorter trip
+                if (smaller.Contains(item, comparer)) continue;
+
+                //If an element from larger is not found in smaller, then these connot be considered equal
+                return false;
+            }
+
+            return true;
+        }
     }
 }

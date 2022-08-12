@@ -64,7 +64,7 @@
 			var hc = 
 				Age.GetHashCode() +
 				Price.GetHashCode() +
-				JobCode.GetHashCode() + //Case sensitivity
+				JobCode.GetObjectHashCode() + //Case sensitivity and strings are nullable by nature
 				SignificantDate.GetHashCode(); //Date vs. Date and Time
 
 			return hc;

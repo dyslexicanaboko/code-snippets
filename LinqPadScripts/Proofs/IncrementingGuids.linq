@@ -6,6 +6,9 @@
   <Namespace>System.Diagnostics.CodeAnalysis</Namespace>
 </Query>
 
+//Idea was getting too big, moved to a separate repostiory:
+//https://github.com/dyslexicanaboko/guid-math
+
 // Creates a new guid based on the value in the string.  The value is made up
 // of hex digits speared by the dash ("-"). The string may begin and end with
 // brackets ("{", "}").

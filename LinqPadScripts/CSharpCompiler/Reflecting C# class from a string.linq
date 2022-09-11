@@ -7,19 +7,19 @@
 
 void Main()
 {
-	//Pulled the bulk of this code from this SO Q/A and modified it.
-	//https://stackoverflow.com/questions/826398/is-it-possible-to-dynamically-compile-and-execute-c-sharp-code-fragments
+	// define source code, then parse it (to the type used for compilation)
 	SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(@"
                 using System;
 
                 namespace RoslynCompileSample
                 {
-                    public class Writer
+                    public class ReallyCoolClass
                     {
-                        public void Write(string message)
-                        {
-                            Console.WriteLine(message);
-                        }
+                        public int Number { get; set; }
+						
+						public string Label { get; set; }
+						
+						public decimal Value { get; set; }
                     }
                 }");
 
@@ -67,18 +67,37 @@ void Main()
 		{
 			// load this 'virtual' DLL so that we can use
 			ms.Seek(0, SeekOrigin.Begin);
-			Assembly assembly = Assembly.Load(ms.ToArray());
+			
+			var assembly = Assembly.Load(ms.ToArray());
 
 			// create instance of the desired class and call the desired function
-			Type type = assembly.GetType("RoslynCompileSample.Writer");
-			object obj = Activator.CreateInstance(type);
-			type.InvokeMember("Write",
-				BindingFlags.Default | BindingFlags.InvokeMethod,
-				null,
-				obj,
-				new object[] { "Hello World" });
+			var type = assembly.GetType("RoslynCompileSample.ReallyCoolClass");
+			
+			DuplicateClass(type).Dump();
 		}
 	}
 
-	Console.ReadLine();
+	Console.WriteLine($"Finished @ {DateTime.Now}");
+}
+
+//This is just a simple example
+public string DuplicateClass(Type type)
+{
+	var properties = type.GetProperties();
+	var lst = new List<string>(properties.Length);
+	
+	foreach (var p in properties)
+	{
+		lst.Add($"\tpublic {p.PropertyType.Name} {p.Name} {{ get; set; }}");
+	}
+
+	var strProperties = string.Join(Environment.NewLine, lst);
+
+	var str = $@"public class {type.Name}2
+	{{
+	{strProperties}
+	}}
+	";
+	
+	return str;
 }

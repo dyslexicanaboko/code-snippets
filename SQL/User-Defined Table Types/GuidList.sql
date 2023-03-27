@@ -1,0 +1,5 @@
+﻿CREATE TYPE [dbo].[GuidList] AS TABLE
+(
+	GuidValue UNIQUEIDENTIFIER NOT NULL,
+	UNIQUE CLUSTERED (GuidValue)
+)

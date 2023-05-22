@@ -2,10 +2,10 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
 	<CodeSnippet Format="1.0.0">
 		<Header>
-			<Title>Execute reader</Title>
-			<Description>Syntax for creating a vanilla ADO.NET SQL command execution</Description>
+			<Title>Execute DataTable</Title>
+			<Description>Syntax for filling a vanilla ADO.NET DataTable</Description>
 			<Author>Eli Hayon</Author>
-			<Shortcut>ExecuteReader</Shortcut>
+			<Shortcut>ExecuteDataTable</Shortcut>
 			<SnippetTypes>
 				<SnippetType>Expansion</SnippetType>
 			</SnippetTypes>
@@ -17,12 +17,13 @@
 
 	using (var cmd = new SqlCommand("", con))
 	{
-		using (var dr = cmd.ExecuteReader())
+		using (var da = new SqlDataAdapter(cmd))
 		{
-			while (dr.Read())
-			{
-				//var obj = Convert.ToInt32(dr[""]);			
-			}
+			var dt = new DataTable("Table1");
+			
+			da.Fill(dt);
+			
+			return dt;
 		}
 	}
 }]]>

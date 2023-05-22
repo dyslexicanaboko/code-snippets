@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Execute DataTable</Title>
+			<Description>Syntax for filling a vanilla ADO.NET DataTable</Description>
+			<Author>Eli Hayon</Author>
+			<Shortcut>ExecuteDataTable</Shortcut>
+			<SnippetTypes>
+				<SnippetType>Expansion</SnippetType>
+			</SnippetTypes>
+		</Header>
+		<Snippet>
+			<Code Language="csharp"><![CDATA[using (var con = new SqlConnection(""))
+{
+	con.Open();
+
+	using (var cmd = new SqlCommand("", con))
+	{
+		using (var da = new SqlDataAdapter(cmd))
+		{
+			var dt = new DataTable("Table1");
+			
+			da.Fill(dt);
+			
+			return dt;
+		}
+	}
+}]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

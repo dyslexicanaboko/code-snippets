@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>LinqPad current path</Title>
+	  <Description>LinqPad specific code for getting the current execution path of the running script.</Description>
+      <Author>Eli Hayon</Author>
+      <Shortcut>lpcp</Shortcut>
+	  <SnippetTypes>
+		<SnippetType>Expansion</SnippetType>
+	  </SnippetTypes>
+    </Header>
+    <Snippet>
+        <Code Language="csharp"><![CDATA[private string BasePath = Path.GetDirectoryName(Util.CurrentQueryPath);]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

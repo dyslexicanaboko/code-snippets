@@ -1,0 +1,6 @@
+{
+  "id": "0a2bb2e2-d690-41d4-9d81-d3f225c335b5",
+  "prefix": "try_catch_trans_throw",
+  "description": "",
+  "body": "BEGIN TRY\n\tBEGIN TRANSACTION\n    \n\t$SELECTEDTEXT$\n\n\tCOMMIT TRANSACTION\nEND TRY  \nBEGIN CATCH\n\tROLLBACK TRANSACTION\n\n    ;THROW;  \nEND CATCH;"
+}

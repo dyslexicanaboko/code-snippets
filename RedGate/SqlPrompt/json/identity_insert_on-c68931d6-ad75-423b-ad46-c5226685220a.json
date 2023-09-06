@@ -1,0 +1,6 @@
+{
+  "id": "c68931d6-ad75-423b-ad46-c5226685220a",
+  "prefix": "identity_insert_on",
+  "description": "Turn on identity insert for a table",
+  "body": "SET IDENTITY_INSERT $SELECTEDTEXT$ ON"
+}

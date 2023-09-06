@@ -1,0 +1,6 @@
+{
+  "id": "a048ce41-f3a8-40da-82cf-f6573f1e1cf2",
+  "prefix": "Star_comment",
+  "description": "Surround text with a multilined star comment.",
+  "body": "/* $SELECTEDTEXT$ */"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "a3314333-b54d-49ae-811e-615683900c29",
+  "prefix": "select_from_sproc",
+  "description": "Select the results from a stored procedure into a table variable",
+  "body": "DECLARE @tbl TABLE \n( \n\tIntValue INT \n)\n\nINSERT @tbl \nEXEC dbo.StoredProcedureName @param = @param1"
+}

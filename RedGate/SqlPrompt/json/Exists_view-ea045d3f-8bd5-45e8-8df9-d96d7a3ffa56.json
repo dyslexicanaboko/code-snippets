@@ -1,0 +1,6 @@
+{
+  "id": "ea045d3f-8bd5-45e8-8df9-d96d7a3ffa56",
+  "prefix": "Exists_view",
+  "description": "Does a view already exist in this database",
+  "body": "-- Check if a view exists\nIF (EXISTS (SELECT * FROM INFORMATION_SCHEMA.VIEWS\n\tWHERE TABLE_SCHEMA = 'dbo' \n\t\tAND TABLE_NAME = 'viewNameHere'\n\t\tAND TABLE_TYPE = 'VIEW'))"
+}

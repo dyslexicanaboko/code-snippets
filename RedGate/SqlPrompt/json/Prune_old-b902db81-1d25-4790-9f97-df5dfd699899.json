@@ -1,0 +1,6 @@
+{
+  "id": "b902db81-1d25-4790-9f97-df5dfd699899",
+  "prefix": "Prune_old",
+  "description": "Count the number of rows that are older than 30 days. Can easily be changed to a DELETE FROM statement.",
+  "body": "-- Count number of rows that are older than 30 days\nSELECT COUNT(EntryId) FROM dbo.Table WHERE DATEDIFF(DAY, CreatedOnUtc, GETUTCDATE()) >= 30"
+}

@@ -1,0 +1,6 @@
+{
+  "id": "9c2d633c-f39b-41ee-93ae-43031000c213",
+  "prefix": "throw_exception",
+  "description": "Throw an exception",
+  "body": "IF NOT EXISTS($SELECTEDTEXT$) BEGIN\r\n\tDECLARE @msg NVARCHAR(2048) = 'Format your message here';\r\n\r\n\t;THROW 60000, @msg, 1;\r\nEND"
+}

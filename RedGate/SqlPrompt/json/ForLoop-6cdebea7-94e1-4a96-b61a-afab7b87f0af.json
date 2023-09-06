@@ -1,0 +1,6 @@
+{
+  "id": "6cdebea7-94e1-4a96-b61a-afab7b87f0af",
+  "prefix": "ForLoop",
+  "description": "Create a for loop using a while statement and an incrementor @i",
+  "body": "DECLARE @tbl TABLE\n(\n\t EntryId INT IDENTITY(0, 1) NOT NULL\n\t,SomeValue INT\n);\n\nDECLARE @i INT = 0;\nDECLARE @count INT = (SELECT COUNT(EntryId) FROM @tbl);\n\nWHILE @i < @count\nBEGIN\n\tDECLARE @someValue INT;\n\n\tSELECT @someValue = SomeValue FROM @tbl WHERE EntryId = @i;\n\t\n\t-- Do stuff here\n\t\n\tSET @i += 1;\nEND"
+}

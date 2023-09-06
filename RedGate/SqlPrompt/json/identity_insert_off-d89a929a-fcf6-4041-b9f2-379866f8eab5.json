@@ -1,0 +1,6 @@
+{
+  "id": "d89a929a-fcf6-4041-b9f2-379866f8eab5",
+  "prefix": "identity_insert_off",
+  "description": "Turn off identity insert for a table",
+  "body": "SET IDENTITY_INSERT $SELECTEDTEXT$ OFF"
+}

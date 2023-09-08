@@ -1,7 +1,7 @@
 ﻿namespace EqualityAndComparison.Lib.Entities
 {
 	public class FlatEntity
-		: IEquatable<FlatEntity>
+		: IEquatable<FlatEntity>, IComparable<FlatEntity>, IFlatEntity
 	{
 		//Not recommended to include primary keys in comparisons and equality. You should be comparing
 		//the substance of your object not the keys
@@ -14,6 +14,16 @@
 		public string JobCode { get; set; }
 
 		public DateTime SignificantDate { get; set; }
+
+		public int CompareTo(FlatEntity other)
+		{
+			//Check if the right hand argument is null
+			if(other is null || Price > other.Price) return 1;
+
+			if(Price == other.Price) return 0;
+
+			return -1;
+		}
 
 		//Base object override required outside of the IEquatable context - best to define it or risk having problems
 		public override bool Equals(object obj) => Equals(obj as FlatEntity);
@@ -41,11 +51,11 @@
 				return false;
 			}
 
-			//Compare logic taylored to the substance of the class
+			//Compare logic tailored to the substance of the class
 			var areEqual =
 				Age == other.Age &&
 				Price == other.Price &&
-				JobCode == other.JobCode && //Use case insensitiviy only if it matters
+				JobCode == other.JobCode && //Use case insensitivity only if it matters
 				SignificantDate == other.SignificantDate; //Choose whether to compare just the date; or the date and time
 
 			return areEqual;

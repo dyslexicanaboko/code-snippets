@@ -1,5 +1,9 @@
 ﻿namespace EqualityAndComparison.Lib.Entities
 {
+  /// <summary>
+  /// Referring to this as a Dumb Entity only because it does not implement any of the
+  /// comparison and equality interfaces.
+  /// </summary>
   public class DumbEntity : IFlatEntity
   {
     public DumbEntity()

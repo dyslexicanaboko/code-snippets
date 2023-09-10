@@ -75,6 +75,7 @@ namespace EqualityAndComparison.Tests.Collections
       Assert.IsTrue(expected.SequenceEqual(_lst));
     }
 
+    //Distinct() relies on the Equals method for its comparison
     [Test]
     public void FlatEntity_WhenIEqualityIsImplemented_ThenDistinctWillEliminateDuplicateObjects()
     {
@@ -88,6 +89,24 @@ namespace EqualityAndComparison.Tests.Collections
       
       var actual = lst.Distinct().ToList();
       
+      Assert.AreEqual(1, actual.Count);
+      Assert.IsTrue(expected.SequenceEqual(actual));
+    }
+
+    //DistinctBy() relies on the Equals method for its comparison
+    [Test]
+    public void FlatEntity_WhenIEqualityIsImplemented_ThenDistinctByWillEliminateDuplicateObjects()
+    {
+      var expected = new List<FlatEntity> { DummyData.GetFlatEntity() };
+      var lst = new List<FlatEntity>(5);
+
+      for (var i = 0; i < 5; i++)
+      {
+        lst.Add(DummyData.GetFlatEntity());
+      }
+
+      var actual = lst.DistinctBy(x => x.JobCode).ToList();
+
       Assert.AreEqual(1, actual.Count);
       Assert.IsTrue(expected.SequenceEqual(actual));
     }

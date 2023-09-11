@@ -62,6 +62,24 @@ namespace EqualityAndComparison.Tests
         GetMoronicCLevel()
     };
 
+    public static Dictionary<FlatEntity, FlatEntity> ToDictionary(this List<FlatEntity> list, IEqualityComparer<FlatEntity> comparer = null)
+      => list.ToDictionary(k => k, v => v, comparer);
+
+    public static Dictionary<DumbEntity, DumbEntity> ToDictionaryOfDumbEntity(this List<FlatEntity> list)
+      => list.ToDumbEntities().ToDictionary(k => k, v => v);
+
+    public static Dictionary<DumbEntity, DumbEntity> ToDictionary(this Dictionary<FlatEntity, FlatEntity> dict)
+    {
+      var d = new Dictionary<DumbEntity, DumbEntity>(dict.Count);
+
+      foreach (var (key, value) in dict)
+      {
+        d.Add(key.ToDumbEntity(), value.ToDumbEntity());
+      }
+
+      return d;
+    }
+
     public static List<DumbEntity> ToDumbEntities(this List<FlatEntity> entities)
       => entities.Select(x => x.ToDumbEntity()).ToList();
 

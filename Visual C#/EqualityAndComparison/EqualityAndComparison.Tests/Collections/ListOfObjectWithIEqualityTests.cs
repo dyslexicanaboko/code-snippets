@@ -8,12 +8,9 @@ namespace EqualityAndComparison.Tests.Collections
   /// T to implement IEquatable{T} in order to perform search operations. The one exception
   /// is the Sort() method which does not require IEquatable{T} to be implemented, but instead
   /// requires Comparison{T} delegate, IComparable{T} or IComparer{T} to perform the sort.
-  ///
-  /// What is interesting about this is that the List{T} class implicitly uses the object's
-  /// equality and comparisons to handle searches. This is not true for other types of collections.
   /// </summary>
   [TestFixture]
-  public class ListOfObjectWithIEqualityImplementedTests
+  public class ListOfObjectWithIEqualityTests
   {
     private List<FlatEntity> _lst;
 
@@ -29,6 +26,7 @@ namespace EqualityAndComparison.Tests.Collections
     {
       var find = DummyData.GetFlatEntity();
 
+      //GetHashCode() is never called, it only uses IEquatable<T>.Equals(T)
       var actual = _lst.Contains(find);
 
       Assert.IsTrue(actual);

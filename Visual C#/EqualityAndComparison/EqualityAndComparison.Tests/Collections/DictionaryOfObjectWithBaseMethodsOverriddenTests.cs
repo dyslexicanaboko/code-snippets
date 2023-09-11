@@ -33,6 +33,18 @@ namespace EqualityAndComparison.Tests.Collections
       Assert.IsTrue(actual);
     }
 
+    /// <summary> The ContainsValue method will not find your object unless it knows how. </summary>
+    [Test]
+    public void DumbEntity_WhenBaseMethodsOverridden_ThenContainsValueWillFindEqualValue()
+    {
+      var value = DummyData.GetFlatEntity();
+
+      //Almost like ContainsKey, the Dictionary will use Equals() method only to perform the search
+      var actual = _dict.ContainsValue(value);
+
+      Assert.IsTrue(actual);
+    }
+
     /// <summary> The Remove method does not know what to remove unless it is told how. </summary>
     [Test]
     public void FlatEntity_WhenBaseMethodsOverridden_ThenRemoveCannotRemoveEqualKey()

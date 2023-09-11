@@ -4,9 +4,9 @@ using NUnit.Framework;
 namespace EqualityAndComparison.Tests.Collections
 {
   /// <summary>
-  /// The goal of these tests is to demonstrate that without implementing the proper interfaces,
-  /// the Dictionary{TKey, TValue} class will not be able to perform comparison and equality
-  /// operations. All tests in this Fixture will fail (while passing the test) to demonstrate that point.
+  /// The goal of these tests is to demonstrate that without implementing the proper equality and comparison logic,
+  /// the Dictionary{TKey, TValue} class will not be able to perform comparison and equality operations effectively.
+  /// All tests in this Fixture will fail (while passing the test) to demonstrate that point.
   /// </summary>
   [TestFixture]
   public class DictionaryOfObjectTests
@@ -19,9 +19,9 @@ namespace EqualityAndComparison.Tests.Collections
       _dict = DummyData.GetThreeFlatEntities().ToDictionaryOfDumbEntity();
     }
 
-    /// <summary> The Contains method will not find your object unless it knows how. </summary>
+    /// <summary> The ContainsKey method will not find your object unless it knows how. </summary>
     [Test]
-    public void DumbEntity_WhenIEqualityComparerIsNotImplemented_ThenContainsDoesNotFindEqualObject()
+    public void DumbEntity_WhenEqualityComparisonNotProvided_ThenContainsKeyDoesNotFindEqualKey()
     {
       var key = DummyData.GetFlatEntity().ToDumbEntity();
 
@@ -30,9 +30,20 @@ namespace EqualityAndComparison.Tests.Collections
       Assert.IsFalse(actual);
     }
 
+    /// <summary> The ContainsValue method will not find your object unless it knows how. </summary>
+    [Test]
+    public void DumbEntity_WhenEqualityComparisonNotProvided_ThenContainsValueDoesNotFindEqualValue()
+    {
+      var value = DummyData.GetFlatEntity().ToDumbEntity();
+
+      var actual = _dict.ContainsValue(value);
+
+      Assert.IsFalse(actual);
+    }
+
     /// <summary> The Remove method does not know what to remove unless it is told how. </summary>
     [Test]
-    public void DumbEntity_WhenIEqualityComparerIsNotImplemented_ThenRemoveCannotRemoveEqualObject()
+    public void DumbEntity_WhenEqualityComparisonNotProvided_ThenRemoveCannotRemoveEqualKey()
     {
       var expected = DummyData.GetTwoFlatEntities().ToDictionaryOfDumbEntity();
 
@@ -49,13 +60,13 @@ namespace EqualityAndComparison.Tests.Collections
     /// they are told how.
     /// </summary>
     [Test]
-    public void DumbEntity_WhenIEqualityComparerIsNotImplemented_ThenAddWillNotRaiseAnExceptionForDuplicateKeys()
+    public void DumbEntity_WhenEqualityComparisonNotProvided_ThenAddWillNotRaiseAnExceptionForDuplicateKeys()
     {
       var item = DummyData.GetFlatEntity().ToDumbEntity();
 
       _dict.Add(item, item);
 
-      Assert.Pass("The fact that an exception is not raised means the the test passed to demonstrate failure.");
+      Assert.Pass("The fact that an exception is not raised means a duplicate key has been added. This is a failure.");
     }
   }
 }

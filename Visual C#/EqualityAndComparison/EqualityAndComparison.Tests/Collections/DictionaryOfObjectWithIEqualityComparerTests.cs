@@ -22,7 +22,7 @@ namespace EqualityAndComparison.Tests.Collections
 
     /// <summary> The Contains method not find your object unless it knows how. </summary>
     [Test]
-    public void FlatEntity_WhenIEqualityComparerImplemented_ThenContainsKeyWillFindEqualKey()
+    public void FlatEntity_WhenIEqualityComparerProvided_ThenContainsKeyWillFindEqualKey()
     {
       var find = DummyData.GetFlatEntity();
 
@@ -33,9 +33,22 @@ namespace EqualityAndComparison.Tests.Collections
       Assert.IsTrue(actual);
     }
 
+    /// <summary> The ContainsValue method will not find your object unless it knows how. </summary>
+    [Test]
+    public void FlatEntity_WhenIEqualityComparerProvided_ThenContainsValueWillFindEqualValue()
+    {
+      var value = DummyData.GetFlatEntity();
+
+      //Almost like ContainsKey, the Dictionary will use overridden Equals() method of TValue only to perform the search
+      //The IEqualityComparer{TKey} is only used for TKey.
+      var actual = _dict.ContainsValue(value);
+
+      Assert.IsTrue(actual);
+    }
+
     /// <summary> The Remove method does not know what to remove unless it is told how. </summary>
     [Test]
-    public void FlatEntity_WhenIEqualityComparerImplemented_ThenRemoveCannotRemoveEqualKey()
+    public void FlatEntity_WhenIEqualityComparerProvided_ThenRemoveCannotRemoveEqualKey()
     {
       var expected = DummyData.GetTwoFlatEntities().ToDictionary();
 
@@ -52,7 +65,7 @@ namespace EqualityAndComparison.Tests.Collections
     /// they are told how.
     /// </summary>
     [Test]
-    public void FlatEntity_WhenIEqualityComparerImplemented_ThenAddWillRaiseArgumentExceptionForDuplicateKeys()
+    public void FlatEntity_WhenIEqualityComparerProvided_ThenAddWillRaiseArgumentExceptionForDuplicateKeys()
     {
       var find = DummyData.GetFlatEntity();
 

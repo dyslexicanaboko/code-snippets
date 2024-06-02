@@ -1,0 +1,6 @@
+{
+  "id": "88963fc3-4966-4892-bc31-03feed17e895",
+  "prefix": "Merge_statement",
+  "description": "Merge statement example",
+  "body": "MERGE Production.UnitMeasure AS target  \nUSING (SELECT @UnitMeasureCode, @Name) AS source (UnitMeasureCode, Name)  \nON (target.UnitMeasureCode = source.UnitMeasureCode)  \nWHEN MATCHED THEN\n    UPDATE SET Name = source.Name  \nWHEN NOT MATCHED THEN  \n    INSERT (UnitMeasureCode, Name)  \n    VALUES (source.UnitMeasureCode, source.Name)  \nOUTPUT deleted.*, $action, inserted.* INTO #MyTempTable; "
+}

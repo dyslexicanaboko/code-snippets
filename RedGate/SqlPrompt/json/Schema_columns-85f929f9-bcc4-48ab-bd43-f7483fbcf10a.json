@@ -1,0 +1,6 @@
+{
+  "id": "85f929f9-bcc4-48ab-bd43-f7483fbcf10a",
+  "prefix": "Schema_columns",
+  "description": "Select columns for the dbo schema from sys.columns",
+  "body": "SELECT\n\t   s.name AS SchemaName\n\t  ,t.name AS TableName\n      ,c.name AS ColumnName\nFROM sys.schemas s\n\tINNER JOIN sys.tables t\n\t\tON t.schema_id = s.schema_id\n\tINNER JOIN sys.columns c\n\t\tON c.object_id = t.object_id\nWHERE s.name = 'dbo'\nORDER BY\n\t  t.name\n\t ,c.name"
+}

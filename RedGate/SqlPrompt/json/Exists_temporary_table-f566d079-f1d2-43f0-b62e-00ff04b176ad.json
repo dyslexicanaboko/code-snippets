@@ -1,0 +1,6 @@
+{
+  "id": "f566d079-f1d2-43f0-b62e-00ff04b176ad",
+  "prefix": "Exists_temporary_table",
+  "description": "Does a temporary table already exist",
+  "body": "-- Check if a temporary table exists\nif OBJECT_ID('tempdb..#tempTableNameHere') is not null"
+}

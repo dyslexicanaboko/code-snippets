@@ -1,0 +1,6 @@
+{
+  "id": "401e42db-834b-44a3-8c4b-fadedd6d7b52",
+  "prefix": "Schema_databases",
+  "description": "Select all user created databases from sys.databases",
+  "body": "SELECT\n\t database_id\n\t,name\nFROM sys.databases \nWHERE database_id > 4"
+}

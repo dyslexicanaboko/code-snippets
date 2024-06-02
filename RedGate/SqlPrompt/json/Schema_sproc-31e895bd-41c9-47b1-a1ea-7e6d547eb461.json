@@ -1,0 +1,6 @@
+{
+  "id": "31e895bd-41c9-47b1-a1ea-7e6d547eb461",
+  "prefix": "Schema_sproc",
+  "description": "Select all stored procedures under the dbo schema from sys.tables",
+  "body": "SELECT\n\t s.name AS SchemaName\n\t,p.name AS ProcedureName\nFROM sys.schemas s\n\tINNER JOIN sys.procedures p\n\t\tON p.schema_id = s.schema_id\nWHERE s.name = 'dbo' \n\tAND p.name = 'sprocName'"
+}

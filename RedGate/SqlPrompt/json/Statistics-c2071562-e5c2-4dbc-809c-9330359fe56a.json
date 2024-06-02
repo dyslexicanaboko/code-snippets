@@ -1,0 +1,6 @@
+{
+  "id": "c2071562-e5c2-4dbc-809c-9330359fe56a",
+  "prefix": "Statistics",
+  "description": "Surround SQL with Statistics and Time capture commands.",
+  "body": "--http://statisticsparser.com/\n        SET STATISTICS IO ON;\n        SET STATISTICS TIME ON;\n        GO\n        \n        $SELECTEDTEXT$\n        GO\n        \n        SET STATISTICS IO OFF;\n        SET STATISTICS TIME OFF;"
+}

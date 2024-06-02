@@ -1,0 +1,6 @@
+{
+  "id": "5d5f31aa-37e7-479f-910e-e614c1c90bfa",
+  "prefix": "Count_by_day",
+  "description": "Count the number of rows by day of a created on column. This is a type of aging of data.",
+  "body": "SELECT\n\t CAST(CreatedOnUtc AS DATE) AS [Day]\n\t,COUNT(TableId) AS Exceptions \n  FROM dbo.TableName\n  GROUP BY CAST(CreatedOnUtc AS DATE)\n  ORDER BY CAST(CreatedOnUtc AS DATE)"
+}

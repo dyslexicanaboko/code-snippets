@@ -1,0 +1,6 @@
+{
+  "id": "e72246e6-d25b-49e3-a327-a88bdcb72201",
+  "prefix": "try_catch",
+  "description": "Try catch with error data as a select",
+  "body": "BEGIN TRY\n\t$SELECTEDTEXT$    \nEND TRY  \nBEGIN CATCH  \n    SELECT  \n         ERROR_NUMBER() AS ErrorNumber  \n        ,ERROR_SEVERITY() AS ErrorSeverity  \n        ,ERROR_STATE() AS ErrorState  \n        ,ERROR_PROCEDURE() AS ErrorProcedure  \n        ,ERROR_LINE() AS ErrorLine  \n        ,ERROR_MESSAGE() AS ErrorMessage;  \nEND CATCH;"
+}

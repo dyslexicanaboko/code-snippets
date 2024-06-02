@@ -1,0 +1,6 @@
+{
+  "id": "f0eba39f-50e6-4a96-ae6e-a404e28b9820",
+  "prefix": "Exists_table",
+  "description": "Does a table exists in the database",
+  "body": "-- Check if a table exists\nIF (EXISTS (SELECT * \n                 FROM INFORMATION_SCHEMA.TABLES \n                 WHERE TABLE_SCHEMA = 'dbo' \n                 AND TABLE_NAME = 'TableNameHere'\n\t\t\t\t AND TABLE_TYPE = 'BASE TABLE'))"
+}

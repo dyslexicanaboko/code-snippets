@@ -1,0 +1,6 @@
+{
+  "id": "b9700e7d-dcdb-4cff-a334-c7e5be841930",
+  "prefix": "Schema_tables",
+  "description": "Select all tables under the dbo schema from sys.tables",
+  "body": "SELECT\n\t s.name AS SchemaName\n\t,t.name AS TableName\nFROM sys.schemas s\n\tINNER JOIN sys.tables t\n\t\tON t.schema_id = s.schema_id\nWHERE s.name = 'dbo'\nORDER BY\n\t  t.name"
+}

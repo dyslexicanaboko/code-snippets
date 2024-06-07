@@ -3,9 +3,10 @@
 void Main()
 {
 	//Removing exclusions from balance entirely
-	var adjustedBalance = 4137.21m - 1949.67m;
-	
+	var adjustedBalance = 4648.03m - 2047.87m;
+
 	var split = SplitStatement(0.5m, adjustedBalance);
+	//var split = SplitStatement(0.5m, 4648.03m, 2000m, 47.87m);
 	
 	split.ToString().Dump();
 }

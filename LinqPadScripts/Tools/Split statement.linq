@@ -2,7 +2,11 @@
 
 void Main()
 {
-	var split = SplitStatement(0.5m, 3413.85m, 206.85m, 679.20m);
+	//Removing exclusions from balance entirely
+	var adjustedBalance = 4648.03m - 2047.87m;
+
+	var split = SplitStatement(0.5m, adjustedBalance);
+	//var split = SplitStatement(0.5m, 4648.03m, 2000m, 47.87m);
 	
 	split.ToString().Dump();
 }
@@ -21,15 +25,15 @@ public AdjustedTotal SplitStatement(decimal splitRate, decimal statementTotal, p
 
 	var adjustedTotal = statementTotal - exclusionTotal;
 	
-	var higherSplit = adjustedTotal*splitRate;
+	var split1 = adjustedTotal*splitRate;
 	
-	var lowerSplit = adjustedTotal - higherSplit + exclusionTotal;
+	var split2 = adjustedTotal - split1 + exclusionTotal;
 
 	var r = new AdjustedTotal
 	{
 		SplitRate = splitRate,
-		SplitHigh = higherSplit,
-		SplitLow = lowerSplit,
+		Split1 = split1,
+		Split2 = split2,
 		BalanceOriginal = statementTotal,
 		BalanceAdjusted = adjustedTotal,
 		Exclusions = exclusionTotal
@@ -50,15 +54,15 @@ public decimal MakeNegative(decimal target)
 public class AdjustedTotal
 {
 	public decimal SplitRate { get; set; }
-	public decimal SplitHigh { get; set; }
-	public decimal SplitLow { get; set; }
+	public decimal Split1 { get; set; }
+	public decimal Split2 { get; set; }
 	public decimal BalanceOriginal { get; set; }
 	public decimal BalanceAdjusted { get; set; }
 	public decimal Exclusions { get; set; }
 
 	public override string ToString()
 	{
-		var s = $"Balance: {BalanceOriginal:c2} -> High: {SplitHigh:c2} | Low: {SplitLow:c2} @ {SplitRate:p2}{Environment.NewLine}" +
+		var s = $"Balance: {BalanceOriginal:c2} -> Split1: {Split1:c2} | Split2: {Split2:c2} @ {SplitRate:p2}{Environment.NewLine}" +
 		$"Adjusted: {BalanceAdjusted:c2} without exclusions {Exclusions:c2}";
 		
 		return s;

@@ -1,4 +1,6 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf;
+using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using Grpc.Net.Client;
 
 namespace GrpcGreeterClient;
@@ -10,11 +12,13 @@ public class Program
     // The port number must match the port of the gRPC server.
     using var channel = GrpcChannel.ForAddress("https://localhost:7025");
 
-    await GreeterTest(channel);
+    //await GreeterTest(channel);
 
-    await MathOperationsTest(channel);
+    //await MathOperationsTest(channel);
 
-    await DivideByZeroTest(channel);
+    //await DivideByZeroTest(channel);
+
+    await RudimentaryEntityTest(channel);
 
     Console.WriteLine("Press any key to exit...");
     Console.ReadKey();
@@ -63,5 +67,35 @@ public class Program
     }
 
     Console.WriteLine($"{input.X} / {input.Y} = {reply.Z}");
+  }
+
+  private static async Task RudimentaryEntityTest(ChannelBase channel)
+  {
+    var client = new RudimentaryService.RudimentaryServiceClient(channel);
+
+    var reply = await client.GetSomeEntityAsync(new Empty());
+
+    Console.WriteLine("Entity: " + reply);
+
+    reply.DoublePrecision = 44.0D;
+    reply.FavoriteDayOfTheWeek = DayOfTheWeek.Sunday;
+    reply.GuaranteedPositiveInteger = 77;
+    reply.GuaranteedPositiveLong = 77L;
+    reply.IsBit = false;
+    reply.ListOfInt.Clear();
+    reply.ListOfInt.AddRange(new []{ 5,5,5,5,5,5 });
+    reply.NoOneReallyUsesFloat = 22.77F;
+    reply.NotQuiteAByteArray = ByteString.CopyFromUtf8("All your base are belong to us");
+    reply.PotentiallyNegativeInteger = -7;
+    reply.PotentiallyNegativeLong = -7L;
+    reply.MinDate = Timestamp.FromDateTime(new DateTime(1993, 8, 1).ToUniversalTime());
+    reply.MaxDate = Timestamp.FromDateTime(DateTime.UtcNow);
+    reply.ShouldBeTimeSpan = reply.MaxDate - reply.MinDate;
+    reply.Text = "All your base are belong to us";
+    reply.ThisWillBeAGuidSomehow = Guid.NewGuid().ToString();
+
+    await client.TakeSomeEntityAsync(reply);
+    
+    Console.WriteLine("Entity sent back");
   }
 }

@@ -13,35 +13,35 @@ namespace GrpcGreeter.Protos
     public string NotQuiteAByteArrayWrapper
     {
       get => NotQuiteAByteArrayWrapperGet(NotQuiteAByteArray);
-      set => NotQuiteAByteArrayWrapperSet(value);
+      set => NotQuiteAByteArray = NotQuiteAByteArrayWrapperSet(value);
     }
 
     /// <inheritdoc />
     public DateTime MinDateWrapper
     {
       get => MinDateWrapperGet(MinDate);
-      set => MinDateWrapperSet(value);
+      set => MinDate = MinDateWrapperSet(value);
     }
 
     /// <inheritdoc />
     public DateTime MaxDateWrapper
     {
       get => MaxDateWrapperGet(MaxDate);
-      set => MaxDateWrapperSet(value);
+      set => MaxDate = MaxDateWrapperSet(value);
     }
 
     /// <inheritdoc />
     public TimeSpan ShouldBeTimeSpanWrapper
     {
       get => ShouldBeTimeSpanWrapperGet(ShouldBeTimeSpan);
-      set => ShouldBeTimeSpanWrapperSet(value);
+      set => ShouldBeTimeSpan = ShouldBeTimeSpanWrapperSet(value);
     }
 
     /// <inheritdoc />
     public Guid ThisWillBeAGuidSomehowWrapper
     {
       get => ThisWillBeAGuidSomehowWrapperGet(ThisWillBeAGuidSomehow);
-      set => ThisWillBeAGuidSomehowWrapperSet(value);
+      set => ThisWillBeAGuidSomehow = ThisWillBeAGuidSomehowWrapperSet(value);
     }
   }
 }

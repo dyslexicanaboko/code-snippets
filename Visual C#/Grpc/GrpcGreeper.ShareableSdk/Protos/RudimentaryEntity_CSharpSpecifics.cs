@@ -21,17 +21,20 @@ namespace GrpcGreeter.Protos
 
     public static DateTime MinDateWrapperGet(Timestamp target)
     {
-      return target.ToDateTime();
+      return target.ToDateTime().ToLocalTime();
     }
 
     public static Timestamp MinDateWrapperSet(DateTime value)
     {
+      //The fact that you have to convert your date from local to UTC is dangerous for the client.
+      //It could be better to just send all datetime data as a string or a long
       return Timestamp.FromDateTime(value.ToUniversalTime());
     }
 
     public static DateTime MaxDateWrapperGet(Timestamp target)
     {
-      return target.ToDateTime();
+      //On the client side you have to convert from UTC to local, but this is machine specific which is also dangerous.
+      return target.ToDateTime().ToLocalTime();
     }
 
     public static Timestamp MaxDateWrapperSet(DateTime value)

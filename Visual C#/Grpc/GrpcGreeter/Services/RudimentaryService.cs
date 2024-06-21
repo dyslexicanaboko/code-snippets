@@ -2,6 +2,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using GrpcGreeter.Protos;
+using Newtonsoft.Json;
 
 namespace GrpcGreeter.Services
 {
@@ -47,8 +48,8 @@ namespace GrpcGreeter.Services
         NotQuiteAByteArrayWrapper = "Hello, World!",
         PotentiallyNegativeInteger = -99,
         PotentiallyNegativeLong = -99L,
-        MinDateWrapper = DateTime.MinValue,
-        MaxDateWrapper = DateTime.MaxValue,
+        MinDateWrapper = DateTime.Parse("2024-06-20 10:00:00"),
+        MaxDateWrapper = DateTime.Parse("2024-06-21 23:19:52"),
         ShouldBeTimeSpanWrapper = TimeSpan.FromDays(1),
         Text = "Hello, World!",
         ThisWillBeAGuidSomehowWrapper = new Guid(TestGuidString)
@@ -58,7 +59,9 @@ namespace GrpcGreeter.Services
     /// <inheritdoc />
     public override Task<Empty> TakeSomeEntity(RudimentaryEntity request, ServerCallContext context)
     {
-      Console.WriteLine($"Received: {request}");
+      var prettyJson = JsonConvert.SerializeObject(request, Formatting.Indented);
+
+      Console.WriteLine($"Received:\n {prettyJson}");
       
       return Task.FromResult(new Empty());
     }

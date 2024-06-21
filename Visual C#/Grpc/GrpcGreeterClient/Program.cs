@@ -2,6 +2,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Grpc.Net.Client;
+using Newtonsoft.Json;
 
 namespace GrpcGreeterClient;
 
@@ -75,7 +76,11 @@ public class Program
 
     var reply = await client.GetSomeEntityAsync(new Empty());
 
-    Console.WriteLine("Entity: " + reply);
+    PrettyPrint(reply);
+
+    reply = await client.GetSomeEntityUsingHelpersAsync(new Empty());
+    
+    PrettyPrint(reply);
 
     reply.DoublePrecision = 44.0D;
     reply.FavoriteDayOfTheWeek = DayOfTheWeek.Sunday;
@@ -97,5 +102,12 @@ public class Program
     await client.TakeSomeEntityAsync(reply);
     
     Console.WriteLine("Entity sent back");
+  }
+
+  private static void PrettyPrint(object? target)
+  {
+    var prettyJson = JsonConvert.SerializeObject(target, Formatting.Indented);
+
+    Console.WriteLine("Entity: \n" + prettyJson);
   }
 }

@@ -10,6 +10,7 @@ package rudimentaryService;
 
 service RudimentaryService {
 	rpc GetSomeEntity (google.protobuf.Empty) returns (RudimentaryEntity) {}
+	rpc GetSomeEntityUsingHelpers (google.protobuf.Empty) returns (RudimentaryEntity) {}
 	rpc TakeSomeEntity (RudimentaryEntity) returns (google.protobuf.Empty) {}
 }
 

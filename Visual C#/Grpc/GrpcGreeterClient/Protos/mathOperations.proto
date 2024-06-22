@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcGreeterClient";
+
+package mathOperations;
+
+service MathOperations {
+	rpc AddIntegers (TwoIntegers) returns (MathResult) {}
+	rpc SubtractIntegers (TwoIntegers) returns (MathResult) {}
+	rpc MultiplyIntegers (TwoIntegers) returns (MathResult) {}
+	rpc DivideIntegers (TwoIntegers) returns (MathResult) {}
+}
+
+message TwoIntegers {
+	int32 x = 1;
+	int32 y = 2;
+}
+
+message MathResult {
+	int32 z = 1;
+}

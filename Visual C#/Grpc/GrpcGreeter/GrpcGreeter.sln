@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcGreeter", "GrpcGreeter.csproj", "{58E0B8AC-98B8-4218-BF66-05D302A0FC48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{906D6951-2A9B-4BFF-92BC-F43DB2E476B2}"
+	ProjectSection(SolutionItems) = preProject
+		..\ReadMe.md = ..\ReadMe.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcGreeper.ShareableSdk", "..\GrpcGreeper.ShareableSdk\GrpcGreeper.ShareableSdk.csproj", "{578FC90E-4844-431C-B461-19F5CF4F5631}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58E0B8AC-98B8-4218-BF66-05D302A0FC48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58E0B8AC-98B8-4218-BF66-05D302A0FC48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58E0B8AC-98B8-4218-BF66-05D302A0FC48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58E0B8AC-98B8-4218-BF66-05D302A0FC48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{578FC90E-4844-431C-B461-19F5CF4F5631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{578FC90E-4844-431C-B461-19F5CF4F5631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{578FC90E-4844-431C-B461-19F5CF4F5631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{578FC90E-4844-431C-B461-19F5CF4F5631}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {659FCC4F-D197-4B12-9216-77B3C6161C74}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+option csharp_namespace = "GrpcGreeter.Protos";
+
+package rudimentaryService;
+
+service RudimentaryService {
+	rpc GetSomeEntity (google.protobuf.Empty) returns (RudimentaryEntity) {}
+	rpc GetSomeEntityUsingHelpers (google.protobuf.Empty) returns (RudimentaryEntity) {}
+	rpc TakeSomeEntity (RudimentaryEntity) returns (google.protobuf.Empty) {}
+}
+
+//https://protobuf.dev/programming-guides/proto3/#scalar
+//https://protobuf.dev/reference/protobuf/google.protobuf/
+
+message RudimentaryEntity {
+	int32 GuaranteedPositiveInteger = 1;
+	sint32 PotentiallyNegativeInteger = 2;
+	int64 GuaranteedPositiveLong = 3;
+	sint64 PotentiallyNegativeLong = 4;
+	float NoOneReallyUsesFloat = 5;
+	double DoublePrecision = 6;
+	bool IsBit = 7;
+	bytes NotQuiteAByteArray = 8;
+	string Text = 9;
+	DayOfTheWeek FavoriteDayOfTheWeek = 10;
+	google.protobuf.Timestamp MinDate = 11;
+	google.protobuf.Timestamp MaxDate = 12;
+	google.protobuf.Duration ShouldBeTimeSpan = 13;
+	string ThisWillBeAGuidSomehow = 14;
+	repeated int32 ListOfInt = 15;
+}
+
+enum DayOfTheWeek {
+	Sunday = 0;
+	Monday = 1;
+	Tuesday = 2;
+	Wednesday = 3;
+	Thursday = 4;
+	Friday = 5;
+	Saturday = 6;
+}
+
+/*
+The most basic types needed for C# business objects are:
+	int -- The only problem here is you need to know if you are using negative numbers or not
+	long -- has the same problem as integer
+	decimal -- I have not found a gRPC equivalent for this yet
+	float
+	double
+	bool (bit)
+	byte[] (binary)
+	string
+	DateTime
+	Timestamp
+	Guid
+	enum
+	List<T>
+
+	When a method has no parameters use google.protobuf.Empty
+	When a method has no return value use google.protobuf.Empty
+*/

@@ -12,7 +12,7 @@ namespace ApiTemplate.Lib.Services
 
     public string GetConnectionString()
     {
-      var connectionString = _configuration.GetConnectionString("MillionsOfThings");
+      var connectionString = _configuration.GetConnectionString("ApiTemplate");
 
       return connectionString!;
     }

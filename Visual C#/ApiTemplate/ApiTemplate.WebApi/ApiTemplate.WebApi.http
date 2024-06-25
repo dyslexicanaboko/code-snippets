@@ -1,6 +1,6 @@
-@MillionsOfThings.WebApi_HostAddress = http://localhost:5273
+@ApiTemplate.WebApi_HostAddress = http://localhost:5273
 
-GET {{MillionsOfThings.WebApi_HostAddress}}/weatherforecast/
+GET {{ApiTemplate.WebApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

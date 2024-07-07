@@ -1,8 +1,8 @@
-﻿using System.Data;
-using ApiTemplate.Lib.Entities;
+﻿using ApiTemplate.Lib.Entities;
 using ApiTemplate.Lib.Services;
 using Dapper;
 using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace ApiTemplate.Lib.DataAccess
 {

@@ -7,14 +7,14 @@ namespace ApiTemplate.Lib.Services
   public class TaskService
     : ITaskService
   {
-    private readonly ITaskRepository _repoTask;
+    private readonly ITaskRepository _repository;
     private readonly ITaskValidation _validation;
 
     public TaskService(
-      ITaskRepository repoTask,
+      ITaskRepository repository,
       ITaskValidation validation)
     {
-      _repoTask = repoTask;
+      _repository = repository;
       _validation = validation;
     }
 
@@ -22,7 +22,7 @@ namespace ApiTemplate.Lib.Services
     {
       Validations.IsGreaterThanZero(taskId, nameof(taskId));
 
-      var dbEntity = _repoTask.Using(x => x.Select(taskId));
+      var dbEntity = _repository.Using(x => x.Select(taskId));
 
       return dbEntity;
     }
@@ -32,7 +32,7 @@ namespace ApiTemplate.Lib.Services
       Validations.ThrowOnError(
         () => Validations.IsUserIdValid(userId, false));
 
-      var lst = _repoTask
+      var lst = _repository
         .Using(x => x.SelectByUserId(userId))
         .ToList();
 
@@ -43,9 +43,9 @@ namespace ApiTemplate.Lib.Services
     {
       Validations.IsValid(_validation, task, nameof(task));
 
-      using (_repoTask)
+      using (_repository)
       {
-        task.TaskId = _repoTask.Insert(task);
+        task.TaskId = _repository.Insert(task);
       }
 
       return task;
@@ -55,9 +55,9 @@ namespace ApiTemplate.Lib.Services
     {
       Validations.IsNotNull(task, nameof(task));
 
-      using (_repoTask)
+      using (_repository)
       {
-        _repoTask.Update(task);
+        _repository.Update(task);
       }
     }
 
@@ -65,7 +65,7 @@ namespace ApiTemplate.Lib.Services
     {
       Validations.IsGreaterThanZero(taskId, nameof(taskId));
 
-      _repoTask.Using(x => x.Delete(taskId));
+      _repository.Using(x => x.Delete(taskId));
     }
   }
 }

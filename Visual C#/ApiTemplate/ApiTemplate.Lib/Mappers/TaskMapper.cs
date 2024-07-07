@@ -25,8 +25,8 @@ namespace ApiTemplate.Lib.Mappers
     public TaskEntity? ToEntity(int userId, TaskV1CreateModel? model)
       => model == null ? null : new TaskEntity(userId, model);
 
-    public TaskV1PatchModel? ToPatchModel(TaskEntity? model)
-      => model == null ? null : new TaskV1PatchModel(model);
+    public TaskV1PatchModel? ToPatchModel(TaskEntity? entity)
+      => entity == null ? null : new TaskV1PatchModel(entity);
 
     public TaskEntity ToEntity(int userId, TaskV1PatchModel model)
       => new (userId, model);

@@ -16,7 +16,7 @@ public interface ITaskMapper
 
   TaskEntity? ToEntity(int userId, TaskV1CreateModel? model);
 
-  TaskV1PatchModel? ToPatchModel(TaskEntity? model);
+  TaskV1PatchModel? ToPatchModel(TaskEntity? entity);
 
   TaskEntity ToEntity(int userId, TaskV1PatchModel model);
 }

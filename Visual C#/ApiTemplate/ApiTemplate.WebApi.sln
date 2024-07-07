@@ -5,7 +5,9 @@ VisualStudioVersion = 17.10.35004.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.WebApi", "ApiTemplate.WebApi\ApiTemplate.WebApi.csproj", "{5A0D12E3-179F-47D7-9CFF-CA4A8749EF9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTemplate.Lib", "ApiTemplate.Lib\ApiTemplate.Lib.csproj", "{3B16429F-6B1F-424F-B8D4-FEF96BA360D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiTemplate.Lib", "ApiTemplate.Lib\ApiTemplate.Lib.csproj", "{3B16429F-6B1F-424F-B8D4-FEF96BA360D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{50329B76-7743-4F59-A0CD-2DACC7B90CDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

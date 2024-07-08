@@ -4,13 +4,13 @@ namespace ApiTemplate.Lib.Services;
 
 public interface ITaskService
 {
-  TaskEntity? GetTask(int taskId);
+  Task<TaskEntity?> GetTask(int taskId);
 
-  IList<TaskEntity> GetAllForUser(int userId);
+  Task<IList<TaskEntity>> GetAllForUser(int userId);
 
-  TaskEntity Add(TaskEntity task);
+  Task<TaskEntity> Add(TaskEntity task);
   
-  void Edit(TaskEntity task);
+  Task Edit(TaskEntity task);
 
-  void Remove(int taskId);
+  Task Remove(int taskId);
 }

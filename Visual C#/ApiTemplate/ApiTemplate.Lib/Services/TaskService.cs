@@ -18,54 +18,51 @@ namespace ApiTemplate.Lib.Services
       _validation = validation;
     }
 
-    public TaskEntity? GetTask(int taskId)
+    public async Task<TaskEntity?> GetTask(int taskId)
     {
       Validations.IsGreaterThanZero(taskId, nameof(taskId));
 
-      var dbEntity = _repository.Using(x => x.Select(taskId));
+      var dbEntity = await _repository.Using(x => x.Select(taskId));
 
       return dbEntity;
     }
 
-    public IList<TaskEntity> GetAllForUser(int userId)
+    public async Task<IList<TaskEntity>> GetAllForUser(int userId)
     {
       Validations.ThrowOnError(
         () => Validations.IsUserIdValid(userId, false));
 
-      var lst = _repository
-        .Using(x => x.SelectByUserId(userId))
+      var lst = (await _repository
+        .Using(x => x.SelectByUserId(userId)))
         .ToList();
 
       return lst;
     }
 
-    public TaskEntity Add(TaskEntity? task)
+    public async Task<TaskEntity> Add(TaskEntity? task)
     {
       Validations.IsValid(_validation, task, nameof(task));
 
       using (_repository)
       {
-        task.TaskId = _repository.Insert(task);
+        task.TaskId = await _repository.Insert(task);
       }
 
       return task;
     }
 
-    public void Edit(TaskEntity task)
+    public async Task Edit(TaskEntity task)
     {
       Validations.IsNotNull(task, nameof(task));
 
-      using (_repository)
-      {
-        _repository.Update(task);
-      }
+      await _repository.Using(x => x.Update(task));
     }
 
-    public void Remove(int taskId)
+    public async Task Remove(int taskId)
     {
       Validations.IsGreaterThanZero(taskId, nameof(taskId));
 
-      _repository.Using(x => x.Delete(taskId));
+      await _repository.Using(x => x.Delete(taskId));
     }
   }
 }

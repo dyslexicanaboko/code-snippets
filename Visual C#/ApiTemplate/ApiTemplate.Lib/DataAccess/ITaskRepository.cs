@@ -4,15 +4,15 @@ namespace ApiTemplate.Lib.DataAccess;
 
 public interface ITaskRepository : IRepository
 {
-  TaskEntity? Select(int taskId);
+  Task<TaskEntity?> Select(int taskId);
 
-  IEnumerable<TaskEntity> SelectByUserId(int userId);
+  Task<IEnumerable<TaskEntity>> SelectByUserId(int userId);
 
-  IEnumerable<TaskEntity> SelectAll();
+  Task<IEnumerable<TaskEntity>> SelectAll();
 
-  int Insert(TaskEntity entity);
+  Task<int> Insert(TaskEntity entity);
 
-  void Update(TaskEntity entity);
+  Task Update(TaskEntity entity);
 
-  void Delete(int taskId);
+  Task Delete(int taskId);
 }

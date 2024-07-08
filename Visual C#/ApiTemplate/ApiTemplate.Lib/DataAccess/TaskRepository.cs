@@ -14,7 +14,7 @@ namespace ApiTemplate.Lib.DataAccess
 		{
 		}
 
-		public TaskEntity? Select(int taskId)
+		public async Task<TaskEntity?> Select(int taskId)
 		{
 			const string sql = @"
 			SELECT
@@ -29,14 +29,14 @@ namespace ApiTemplate.Lib.DataAccess
 			FROM dbo.Task
 			WHERE TaskId = @TaskId";
 
-			using var connection = new SqlConnection(ConnectionString);
+			await using var connection = new SqlConnection(ConnectionString);
 
-			var lst = connection.Query<TaskEntity>(sql, new { TaskId = taskId }).ToList();
+			var lst = (await connection.QueryAsync<TaskEntity>(sql, new { TaskId = taskId })).ToList();
 
 			return lst.SingleOrDefault();
 		}
 
-		public IEnumerable<TaskEntity> SelectByUserId(int userId)
+		public async Task<IEnumerable<TaskEntity>> SelectByUserId(int userId)
 		{
 			const string sql = @"
 			SELECT
@@ -51,12 +51,12 @@ namespace ApiTemplate.Lib.DataAccess
 			FROM dbo.Task
 			WHERE UserId = @UserId";
 
-			using var connection = new SqlConnection(ConnectionString);
+			await using var connection = new SqlConnection(ConnectionString);
 
-			return connection.Query<TaskEntity>(sql, new { UserId = userId });
+			return await connection.QueryAsync<TaskEntity>(sql, new { UserId = userId });
 		}
 
-		public IEnumerable<TaskEntity> SelectAll()
+		public async Task<IEnumerable<TaskEntity>> SelectAll()
 		{
 			const string sql = @"
 			SELECT
@@ -70,13 +70,13 @@ namespace ApiTemplate.Lib.DataAccess
 								ModifiedOn
 			FROM dbo.Task";
 
-			using var connection = new SqlConnection(ConnectionString);
+			await using var connection = new SqlConnection(ConnectionString);
 
-			return connection.Query<TaskEntity>(sql).ToList();
+			return (await connection.QueryAsync<TaskEntity>(sql)).ToList();
 		}
 
 		//Preference on whether or not insert method returns a value is up to the user and the object being inserted
-		public int Insert(TaskEntity entity)
+		public async Task<int> Insert(TaskEntity entity)
 		{
 			const string sql = @"INSERT INTO dbo.Task (
 								UserId,
@@ -97,7 +97,7 @@ namespace ApiTemplate.Lib.DataAccess
 
 			SELECT SCOPE_IDENTITY() AS PK;";
 
-			using var connection = new SqlConnection(ConnectionString);
+			await using var connection = new SqlConnection(ConnectionString);
 
 			var p = new DynamicParameters();
 			p.Add("@UserId", dbType: DbType.Int32, value: entity.UserId);
@@ -129,10 +129,10 @@ namespace ApiTemplate.Lib.DataAccess
 				value: entity.ModifiedOn,
 				scale: 0);
 
-			return connection.ExecuteScalar<int>(sql, entity);
+			return await connection.ExecuteScalarAsync<int>(sql, entity);
 		}
 
-		public void Update(TaskEntity entity)
+		public async Task Update(TaskEntity entity)
 		{
 			const string sql = @"UPDATE dbo.Task SET 
 								UserId = @UserId,
@@ -144,7 +144,7 @@ namespace ApiTemplate.Lib.DataAccess
 								ModifiedOn = @ModifiedOn
 						WHERE TaskId = @TaskId";
 
-			using var connection = new SqlConnection(ConnectionString);
+			await using var connection = new SqlConnection(ConnectionString);
 
 			var p = new DynamicParameters();
 			p.Add("@TaskId", dbType: DbType.Int32, value: entity.TaskId);
@@ -177,19 +177,16 @@ namespace ApiTemplate.Lib.DataAccess
 				value: entity.ModifiedOn,
 				scale: 0);
 
-			connection.Execute(sql, p);
+			await connection.ExecuteAsync(sql, p);
 		}
 
-		public void Delete(int taskId)
+		public async Task Delete(int taskId)
 		{
 			const string sql = "DELETE FROM dbo.Task WHERE TaskId = @TaskId";
 
-			using var connection = new SqlConnection(ConnectionString);
-
-			var p = new DynamicParameters();
-			p.Add("@TaskId", dbType: DbType.Int32, value: taskId);
-
-			connection.Execute(sql, p);
+			await using var connection = new SqlConnection(ConnectionString);
+			
+			await connection.ExecuteAsync(sql, taskId);
 		}
 	}
 }

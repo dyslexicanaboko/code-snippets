@@ -31,10 +31,10 @@ namespace ApiTemplate.WebApi.Controllers
     [HttpGet("{id:int}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ITask))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
-    public ActionResult<ITask> Get(int id)
+    public async Task<ActionResult<ITask>> Get(int id)
     {
       //TODO: Need to verify that the user has access to the requested resource
-      var entity = _service.GetTask(id); //TODO: UserId needs to be passed
+      var entity = await _service.GetTask(id); //TODO: UserId needs to be passed
 
       if (entity == null) throw Lib.Exceptions.NotFound.Task(id);
 
@@ -53,7 +53,7 @@ namespace ApiTemplate.WebApi.Controllers
 
       Validations.IsNotNull(entity, nameof(model));
 
-      var result = (await Task.FromResult(_service.Add(entity)));
+      var result = await _service.Add(entity);
 
       var m = _mapper.ToModel(result);
 
@@ -66,11 +66,11 @@ namespace ApiTemplate.WebApi.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorModel))]
     [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorModel))]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(ErrorModel))]
-    public ActionResult Patch(int id, [FromBody] JsonPatchDocument<TaskV1PatchModel> patchDoc)
+    public async Task<ActionResult> Patch(int id, [FromBody] JsonPatchDocument<TaskV1PatchModel> patchDoc)
     {
       //TODO: Need more sophisticated patching that only updates what has changed #23
       //TODO: Needs proper validation #24
-      var db = _service.GetTask(id);
+      var db = await _service.GetTask(id);
 
       //Preload with existing DB values
       var model = _mapper.ToPatchModel(db);
@@ -83,7 +83,7 @@ namespace ApiTemplate.WebApi.Controllers
       //Back to entity so it can be updated
       var entity = _mapper.ToEntity(db!.TaskId, model);
 
-      _service.Edit(entity);
+      await _service.Edit(entity);
 
       return NoContent();
     }
@@ -91,9 +91,9 @@ namespace ApiTemplate.WebApi.Controllers
     // DELETE api/tasks/5
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    public ActionResult Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-      _service.Remove(id);
+      await _service.Remove(id);
 
       return NoContent();
     }

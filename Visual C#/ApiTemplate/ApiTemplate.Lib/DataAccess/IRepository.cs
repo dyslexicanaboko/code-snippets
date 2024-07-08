@@ -6,13 +6,13 @@ namespace ApiTemplate.Lib.DataAccess
     : IRepository
     where T : class, new()
   {
-    T? Select(int earningsId);
+    Task<T?> Select(int earningsId);
 
-    IEnumerable<T> SelectAll();
+    Task<IEnumerable<T>> SelectAll();
 
-    int Insert(T entity);
+    Task<int> Insert(T entity);
 
-    void Update(T entity);
+    Task Update(T entity);
   }
 
   public interface IRepository

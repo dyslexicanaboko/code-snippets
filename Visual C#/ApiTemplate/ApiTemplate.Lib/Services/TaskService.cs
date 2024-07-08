@@ -43,10 +43,7 @@ namespace ApiTemplate.Lib.Services
     {
       Validations.IsValid(_validation, task, nameof(task));
 
-      using (_repository)
-      {
-        task.TaskId = await _repository.Insert(task);
-      }
+      task.TaskId = await _repository.Using(x => x.Insert(task));
 
       return task;
     }
